@@ -15,7 +15,7 @@ function Login() {
       <StatusBar style="auto" />
       <Icon
         name="arrow-left"
-        size={20}
+        size={24}
         color="#fff"
         style={{ marginTop: 20 }}
       />
@@ -25,7 +25,15 @@ function Login() {
       </View>
       <View style={{ marginTop: 20 }}>
         <Text style={styles.text}>Mật khẩu</Text>
-        <TextInput style={styles.input} />
+        <View>
+          <TextInput style={styles.input} />
+          <Icon
+            name="eye-slash"
+            size={24}
+            color="#fff"
+            style={{ position: "absolute", right: 11, top: 11 }}
+          />
+        </View>
       </View>
       <View
         style={{
