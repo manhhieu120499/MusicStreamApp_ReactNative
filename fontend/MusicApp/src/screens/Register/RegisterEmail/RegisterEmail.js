@@ -5,6 +5,7 @@ import {
 	StyleSheet,
 	TextInput,
 	TouchableOpacity,
+	StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -14,6 +15,7 @@ function RegisterEmail() {
 	const validateEmail = (email) => {};
 	return (
 		<View style={styles.container}>
+			<StatusBar style="auto" />
 			<View
 				style={{
 					flex: 10,
@@ -108,7 +110,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 100,
 		backgroundColor: '#101010',
-		marginTop: 37,
 	},
 });
 
