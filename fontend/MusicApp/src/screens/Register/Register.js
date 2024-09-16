@@ -1,11 +1,19 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	StyleSheet,
+	Image,
+	StatusBar,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Register() {
 	return (
 		<View style={styles.container}>
+			<StatusBar style="auto" />
 			<View style={{ flex: 25 }} />
 			<View style={{ flex: 75, alignItems: 'center' }}>
 				<Icon name="spotify" size={50} color={'white'} />
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 100,
 		backgroundColor: '#101010',
-		marginTop: 37,
+		// marginTop: 37,
 	},
 	btn: {
 		width: '90%',
