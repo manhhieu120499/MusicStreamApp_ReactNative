@@ -5,10 +5,11 @@ import {
   RegisterEmail,
   RegisterPassword,
   Search,
+  Login,
 } from "./src/screens";
 
 export default function App() {
-  return <Search />;
+  return <Login />;
 }
 
 const styles = StyleSheet.create({
