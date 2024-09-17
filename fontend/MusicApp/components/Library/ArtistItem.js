@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 function ArtistItem(props) {
   const { name, image, text } = props;

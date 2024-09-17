@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, StatusBar, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Artist } from "../../components";
+import { Artists } from "../../components";
 
 function Library() {
   return (
@@ -125,7 +117,7 @@ function Library() {
           </View>
           <Icon name="list-ul" size={14} color="#fff" />
         </View>
-        <Artist />
+        <Artists />
       </ScrollView>
     </View>
   );
