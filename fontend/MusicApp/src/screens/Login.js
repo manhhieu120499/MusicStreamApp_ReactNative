@@ -81,9 +81,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   text: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: "bold",
     color: "#fff",
+    paddingBottom: 10,
   },
   input: {
     height: 50,

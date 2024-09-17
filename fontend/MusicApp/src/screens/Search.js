@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, StatusBar, StyleSheet, ScrollView } from "react-native";
 import { Category, CategoryVideo } from "../../components";
 import Icon from "react-native-vector-icons/FontAwesome";
 

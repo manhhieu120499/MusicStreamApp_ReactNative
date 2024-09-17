@@ -2,13 +2,6 @@ import React from "react";
 import CardItem from "./CardItem";
 import { FlatList, Text, View } from "react-native";
 
-const yoursOwn = [
-  {
-    uri: "https://daylist.spotifycdn.com/playlist-covers-mix/en/afternoon_default.jpg",
-    text: "Danh sách phát cho các khoảnh khắc trong ngày",
-  },
-];
-
 function Cards(props) {
   const { title, data } = props;
   return (

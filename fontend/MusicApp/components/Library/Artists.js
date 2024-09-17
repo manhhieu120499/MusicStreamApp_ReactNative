@@ -43,7 +43,6 @@ const listArtist = [
 
 function Artists() {
   return (
-    // <View style={{ flexDirection: "row" }}>
     <FlatList
       data={listArtist}
       keyExtractor={(item) => item.id.toString()}
@@ -53,10 +52,7 @@ function Artists() {
       scrollEnabled={false}
       numColumns={3}
       columnWrapperStyle={{ justifyContent: "space-between" }}
-      //   horizontal
-      //   columnWrapperStyle={{ justifyContent: "space-between" }}
     />
-    // </View>
   );
 }
 
