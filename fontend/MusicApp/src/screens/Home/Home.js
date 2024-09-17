@@ -9,8 +9,9 @@ import {
 	FlatList,
 	StatusBar,
 } from 'react-native';
-import { MusicItem } from '../../../components';
-import PodcastItem from '../../../components/PodcastItem';
+import MusicTab from './MusicTab';
+import PodcastTab from './PodcastTab';
+import Navbar from './Navbar';
 
 const data = [
 	{
@@ -136,197 +137,15 @@ function Home(props) {
 				style={{ flex: 100, backgroundColor: '#101010' }}
 				showsVerticalScrollIndicator={false}
 			>
-				{/**Navbar */}
-				<View
-					style={{
-						flexDirection: 'row',
-						alignItems: 'center',
-						height: 60,
-						width: '100%',
-					}}
-				>
-					<TouchableOpacity
-						style={{ width: 40, height: 40, borderRadius: 20 }}
-					>
-						<Image
-							source={{
-								uri: 'https://i.pinimg.com/736x/a2/0d/a5/a20da505d402071bbbfc9bb55f59fb97.jpg',
-							}}
-							style={{
-								width: '100%',
-								height: '100%',
-								borderRadius: 20,
-							}}
-						/>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={[
-							styles.btnNavbar,
-							{
-								backgroundColor:
-									active.all == true ? '#008000' : '#ccc',
-							},
-						]}
-						onPress={() =>
-							setActive({
-								all: true,
-								music: false,
-								podcast: false,
-							})
-						}
-					>
-						<Text style={styles.txtBtnNavbar}>Tất cả</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={[
-							styles.btnNavbar,
-							{
-								backgroundColor:
-									active.music == true ? '#008000' : '#ccc',
-							},
-						]}
-						onPress={() =>
-							setActive({
-								all: false,
-								music: true,
-								podcast: false,
-							})
-						}
-					>
-						<Text style={styles.txtBtnNavbar}>Nhạc</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={[
-							styles.btnNavbar,
-							{
-								backgroundColor:
-									active.podcast == true ? '#008000' : '#ccc',
-							},
-						]}
-						onPress={() =>
-							setActive({
-								all: false,
-								music: false,
-								podcast: true,
-							})
-						}
-					>
-						<Text style={styles.txtBtnNavbar}>Podcast</Text>
-					</TouchableOpacity>
-				</View>
-				<View style={{ width: '100%' }}>
-					{/** header music */}
-					<View
-						style={{
-							flexDirection: 'row',
-							width: '100%',
-							marginTop: 15,
-						}}
-					>
-						<Image
-							source={{
-								uri: 'https://i.pinimg.com/736x/a2/0d/a5/a20da505d402071bbbfc9bb55f59fb97.jpg',
-							}}
-							style={{
-								width: 45,
-								height: 45,
-								borderRadius: 8,
-								marginRight: 10,
-							}}
-						/>
-						<View>
-							<Text style={{ fontSize: 14, color: 'white' }}>
-								Phổ biến với người nghe của
-							</Text>
-							<Text
-								style={{
-									fontSize: 20,
-									color: 'white',
-									fontWeight: 'bold',
-								}}
-							>
-								for my Rose
-							</Text>
-						</View>
-					</View>
-					{/** list music */}
-
-					<View
-						style={{
-							width: '100%',
-							marginTop: 10,
-						}}
-					>
-						<FlatList
-							data={data}
-							renderItem={({ item }) => <MusicItem data={item} />}
-							keyExtractor={(item) => item.id}
-							horizontal={true}
-							showsHorizontalScrollIndicator={false}
-						/>
-					</View>
-				</View>
-				{/** album */}
-				<View style={{ width: '100%', marginVertical: 20 }}>
-					<Text
-						style={{
-							fontSize: 16,
-							fontWeight: 'bold',
-							color: 'white',
-						}}
-					>
-						Tuyển tập nhạc hàng đầu của bạn
-					</Text>
-					<View
-						style={{
-							width: '100%',
-							marginTop: 5,
-						}}
-					>
-						<FlatList
-							data={dataTwo}
-							renderItem={({ item }) => <MusicItem data={item} />}
-							keyExtractor={(item) => item.id}
-							horizontal={true}
-							showsHorizontalScrollIndicator={false}
-						/>
-					</View>
-				</View>
-				<View style={{ width: '100%' }}>
-					<Text
-						style={{
-							fontSize: 16,
-							fontWeight: 'bold',
-							color: 'white',
-						}}
-					>
-						Mới phát gần đây
-					</Text>
-					<View
-						style={{
-							width: '100%',
-							marginTop: 5,
-						}}
-					>
-						<FlatList
-							data={dataThree}
-							renderItem={({ item }) => <MusicItem data={item} />}
-							keyExtractor={(item) => item.id}
-							horizontal={true}
-							showsHorizontalScrollIndicator={false}
-						/>
-					</View>
-				</View>
-				{/** podcasr */}
-				<View style={{ width: '100%', marginTop: 20 }}>
-					<FlatList
-						data={dataPodcast}
-						renderItem={({ item }) => <PodcastItem data={item} />}
-						keyExtractor={(item) => item.id}
-						showsHorizontalScrollIndicator={false}
-						scrollEnabled={false}
-					/>
-				</View>
+				<Navbar styles={styles} state={[active, setActive]} />
+				{active.all && (
+					<>
+						<MusicTab data={[data, dataTwo, dataThree]} />
+						<PodcastTab data={dataPodcast} />
+					</>
+				)}
+				{active.music && <MusicTab data={[data, dataTwo, dataThree]} />}
+				{active.podcast && <PodcastTab data={dataPodcast} />}
 			</ScrollView>
 		</View>
 	);
