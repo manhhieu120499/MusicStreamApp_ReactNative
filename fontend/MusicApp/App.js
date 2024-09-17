@@ -10,7 +10,8 @@ import {
 	Library,
 	SearchForYou,
 } from './src/screens';
+import { AppNavigator } from './navigation';
 
 export default function App() {
-	return <Library />;
+	return <AppNavigator />;
 }

@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function RegisterEmail() {
+function RegisterEmail(props) {
+	const { navigation, route } = props;
+	const { navigate, goBack } = navigation;
 	const [email, setEmail] = useState('');
 	const [messgae, setMessgae] = useState('');
 	const validateEmail = (email) => {};
@@ -26,7 +28,12 @@ function RegisterEmail() {
 					marginBottom: 15,
 				}}
 			>
-				<Icon name="chevron-left" size={20} color={'white'} />
+				<Icon
+					name="chevron-left"
+					size={20}
+					color={'white'}
+					onPress={() => goBack('Register')}
+				/>
 				<Text
 					style={{
 						fontSize: 16,
@@ -78,6 +85,7 @@ function RegisterEmail() {
 						marginTop: 20,
 					}}
 					onPress={() => {
+						navigate('RegisterPassword');
 						if (validateEmail(email)) {
 							{
 								/** handle success */

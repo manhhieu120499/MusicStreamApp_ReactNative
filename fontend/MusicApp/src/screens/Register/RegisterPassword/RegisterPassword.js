@@ -10,6 +10,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function RegisterPassword(props) {
+	const { navigation, route } = props;
+	const { navigate, goBack } = navigation;
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	const validatePassword = (password) => {};
@@ -26,7 +28,12 @@ function RegisterPassword(props) {
 					marginBottom: 15,
 				}}
 			>
-				<Icon name="chevron-left" size={20} color={'white'} />
+				<Icon
+					name="chevron-left"
+					size={20}
+					color={'white'}
+					onPress={() => goBack('RegisterEmail')}
+				/>
 				<Text
 					style={{
 						fontSize: 16,
@@ -92,6 +99,7 @@ function RegisterPassword(props) {
 						marginTop: 20,
 					}}
 					onPress={() => {
+						navigate('UITab');
 						if (validatePassword(password)) {
 							{
 								/** handle success */

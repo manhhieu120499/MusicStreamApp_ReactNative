@@ -10,7 +10,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function Register() {
+function Register(props) {
+	const { navigation, route } = props;
+	const { navigate, goBack } = navigation;
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
@@ -43,6 +45,7 @@ function Register() {
 								justifyContent: 'center',
 							},
 						]}
+						onPress={() => navigate('RegisterEmail')}
 					>
 						<Text
 							style={{
@@ -105,7 +108,7 @@ function Register() {
 						<Text style={styles.txtBtn}>Tiếp tục bằng Apple</Text>
 					</TouchableOpacity>
 				</View>
-				<TouchableOpacity>
+				<TouchableOpacity onPress={() => navigate('Login')}>
 					<Text
 						style={{
 							color: 'white',
