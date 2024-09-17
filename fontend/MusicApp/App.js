@@ -7,8 +7,10 @@ import {
   Home,
   Search,
   Login,
+  Library,
+  SearchForYou,
 } from "./src/screens";
 
 export default function App() {
-  return <Login />;
+  return <SearchForYou />;
 }
