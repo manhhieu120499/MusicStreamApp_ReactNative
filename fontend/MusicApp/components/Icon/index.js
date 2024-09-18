@@ -1,3 +1,19 @@
-import { LibraryIcon, SearchIcon, HomeIcon, PremiumIcon } from './Icon';
+import {
+	LibraryIcon,
+	SearchIcon,
+	HomeIcon,
+	PremiumIcon,
+	RandomIcon,
+	RepeatIcon,
+	ReflectIcon,
+} from './Icon';
 
-export { LibraryIcon, SearchIcon, HomeIcon, PremiumIcon };
+export {
+	LibraryIcon,
+	SearchIcon,
+	HomeIcon,
+	PremiumIcon,
+	RandomIcon,
+	RepeatIcon,
+	ReflectIcon,
+};

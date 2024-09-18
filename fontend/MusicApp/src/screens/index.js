@@ -6,6 +6,7 @@ import Search from './Search';
 import Login from './Login';
 import Library from './Library';
 import SearchForYou from './SearchForYou';
+import PlayingMusic from './PlayingMusic';
 
 export {
 	Register,
@@ -16,4 +17,5 @@ export {
 	Login,
 	Library,
 	SearchForYou,
+	PlayingMusic,
 };

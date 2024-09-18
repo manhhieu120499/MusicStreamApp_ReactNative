@@ -11,7 +11,8 @@ import {
 	SearchForYou,
 } from './src/screens';
 import { AppNavigator } from './navigation';
+import PlayingMusic from './src/screens/PlayingMusic';
 
 export default function App() {
-	return <AppNavigator />;
+	return <PlayingMusic />;
 }

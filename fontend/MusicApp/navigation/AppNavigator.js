@@ -10,6 +10,7 @@ import {
 	Login,
 	Library,
 	SearchForYou,
+	PlayingMusic,
 } from '../src/screens';
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ function AppNavigator() {
 					component={RegisterPassword}
 				/>
 				<Stack.Screen name="UITab" component={UITab} />
+				<Stack.Screen name="PlayingMusic" component={PlayingMusic} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

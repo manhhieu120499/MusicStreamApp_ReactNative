@@ -67,3 +67,56 @@ export const PremiumIcon = ({ width = 20, height = 20, color = 'white' }) => {
 		</Svg>
 	);
 };
+
+export const RandomIcon = ({ width = 20, height = 20, color = 'white' }) => {
+	return (
+		<Svg
+			dataEncoreId="icon"
+			role="img"
+			ariaHidden="true"
+			viewBox="0 0 24 24"
+			class="Svg-sc-ytk21e-0 bneLcE"
+			width={width}
+			height={height}
+			fill={color}
+		>
+			<Path d="M18.788 3.702a1 1 0 0 1 1.414-1.414L23.914 6l-3.712 3.712a1 1 0 1 1-1.414-1.414L20.086 7h-1.518a5 5 0 0 0-3.826 1.78l-7.346 8.73a7 7 0 0 1-5.356 2.494H1v-2h1.04a5 5 0 0 0 3.826-1.781l7.345-8.73A7 7 0 0 1 18.569 5h1.518l-1.298-1.298z"></Path>
+			<Path d="M18.788 14.289a1 1 0 0 0 0 1.414L20.086 17h-1.518a5 5 0 0 1-3.826-1.78l-1.403-1.668-1.306 1.554 1.178 1.4A7 7 0 0 0 18.568 19h1.518l-1.298 1.298a1 1 0 1 0 1.414 1.414L23.914 18l-3.712-3.713a1 1 0 0 0-1.414 0zM7.396 6.49l2.023 2.404-1.307 1.553-2.246-2.67a5 5 0 0 0-3.826-1.78H1v-2h1.04A7 7 0 0 1 7.396 6.49z"></Path>
+		</Svg>
+	);
+};
+
+export const RepeatIcon = ({ width = 20, height = 20, color = 'white' }) => {
+	return (
+		<Svg
+			dataEncoreId="icon"
+			role="img"
+			ariaHidden="true"
+			viewBox="0 0 24 24"
+			class="Svg-sc-ytk21e-0 bneLcE"
+			width={width}
+			height={height}
+			fill={color}
+		>
+			<Path d="M6 2a5 5 0 0 0-5 5v8a5 5 0 0 0 5 5h1v-2H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-4.798l1.298-1.298a1 1 0 1 0-1.414-1.414L9.373 19l3.713 3.712a1 1 0 0 0 1.414-1.414L13.202 20H18a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5H6z"></Path>
+		</Svg>
+	);
+};
+
+export const ReflectIcon = ({ width = 20, height = 20, color = 'white' }) => {
+	return (
+		<Svg
+			dataEncoreId="icon"
+			role="img"
+			ariaHidden="true"
+			viewBox="0 0 16 16"
+			class="Svg-sc-ytk21e-0 dYnaPI"
+			width={width}
+			height={height}
+			fill={color}
+		>
+			<Path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15h-6.5A1.75 1.75 0 0 1 6 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25h-6.5zm-6 0a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25H4V11H1.75A1.75 1.75 0 0 1 0 9.25v-6.5C0 1.784.784 1 1.75 1H4v1.5H1.75zM4 15H2v-1.5h2V15z"></Path>
+			<Path d="M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-1-5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></Path>
+		</Svg>
+	);
+};
