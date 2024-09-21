@@ -12,6 +12,7 @@ import {
 	SearchForYou,
 	PlayingMusic,
 } from '../src/screens';
+import PreviewItem from '../components/PreviewItem';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ function AppNavigator() {
 				/>
 				<Stack.Screen name="UITab" component={UITab} />
 				<Stack.Screen name="PlayingMusic" component={PlayingMusic} />
+				<Stack.Screen name="PreviewItem" component={PreviewItem} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

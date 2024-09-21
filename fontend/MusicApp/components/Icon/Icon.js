@@ -120,3 +120,39 @@ export const ReflectIcon = ({ width = 20, height = 20, color = 'white' }) => {
 		</Svg>
 	);
 };
+
+export const CirclePlus = ({ width = 20, height = 20, color = 'white' }) => {
+	return (
+		<Svg
+			dataEncoreId="icon"
+			role="img"
+			ariaHidden="true"
+			viewBox="0 0 24 24"
+			class="Svg-sc-ytk21e-0 bneLcE"
+			fill={color}
+			width={width}
+			height={height}
+		>
+			<Path d="M11.999 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm-11 9c0-6.075 4.925-11 11-11s11 4.925 11 11-4.925 11-11 11-11-4.925-11-11z"></Path>
+			<Path d="M17.999 12a1 1 0 0 1-1 1h-4v4a1 1 0 1 1-2 0v-4h-4a1 1 0 1 1 0-2h4V7a1 1 0 1 1 2 0v4h4a1 1 0 0 1 1 1z"></Path>
+		</Svg>
+	);
+};
+
+export const UploadIcon = ({ width = 20, height = 20, color = 'white' }) => {
+	return (
+		<Svg
+			dataEncoreId="icon"
+			role="img"
+			ariaHidden="true"
+			viewBox="0 0 24 24"
+			class="Svg-sc-ytk21e-0 bneLcE"
+			width={width}
+			height={height}
+			fill={color}
+		>
+			<Path d="M3 8a1 1 0 0 1 1-1h3.5v2H5v11h14V9h-2.5V7H20a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z"></Path>
+			<Path d="M12 12.326a1 1 0 0 0 1-1V3.841l1.793 1.793a1 1 0 1 0 1.414-1.414L12 .012 7.793 4.22a1 1 0 1 0 1.414 1.414L11 3.84v7.485a1 1 0 0 0 1 1z"></Path>
+		</Svg>
+	);
+};

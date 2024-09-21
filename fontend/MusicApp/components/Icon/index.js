@@ -6,6 +6,8 @@ import {
 	RandomIcon,
 	RepeatIcon,
 	ReflectIcon,
+	CirclePlus,
+	UploadIcon,
 } from './Icon';
 
 export {
@@ -16,4 +18,6 @@ export {
 	RandomIcon,
 	RepeatIcon,
 	ReflectIcon,
+	CirclePlus,
+	UploadIcon,
 };
