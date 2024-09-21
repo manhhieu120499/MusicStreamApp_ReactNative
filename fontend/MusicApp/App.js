@@ -10,10 +10,11 @@ import {
 	Library,
 	SearchForYou,
 	Profile,
+	Premium,
 } from './src/screens';
 import { AppNavigator } from './navigation';
 import PlayingMusic from './src/screens/PlayingMusic';
 
 export default function App() {
-	return <Profile />;
+	return <AppNavigator />;
 }

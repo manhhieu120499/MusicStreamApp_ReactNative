@@ -1,8 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Library, Search } from '../src/screens';
+import { Home, Library, Premium, Search } from '../src/screens';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { HomeIcon, LibraryIcon, SearchIcon } from '../components/Icon';
+import {
+	HomeIcon,
+	LibraryIcon,
+	PremiumIcon,
+	SearchIcon,
+} from '../components/Icon';
 const Tab = createBottomTabNavigator();
 
 const screenOptions = ({ route }) => ({
@@ -24,6 +29,11 @@ const screenOptions = ({ route }) => ({
 			Library: {
 				icon: (
 					<LibraryIcon color={focused == true ? 'white' : 'gray'} />
+				),
+			},
+			Premium: {
+				icon: (
+					<PremiumIcon color={focused == true ? 'white' : 'gray'} />
 				),
 			},
 		};
@@ -59,6 +69,16 @@ function UITab(props) {
 				component={Library}
 				options={{
 					tabBarLabel: 'Library',
+					tabBarLabelStyle: {
+						fontSize: 12,
+					},
+				}}
+			/>
+			<Tab.Screen
+				name="Premium"
+				component={Premium}
+				options={{
+					tabBarLabel: 'Premium',
 					tabBarLabelStyle: {
 						fontSize: 12,
 					},
