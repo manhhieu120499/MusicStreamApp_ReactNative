@@ -1,10 +1,16 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect } from "react";
+import { View, Text, Image, Pressable } from "react-native";
+
+const data = {
+  kpop: ["Zhou Shen", "Liu Yu", "Zhou Keyu"],
+};
 
 function CategoryItem(props) {
-  const { name, bgColor, img } = props;
+  const { name, bgColor, img, path } = props;
+  const navigation = useNavigation();
   return (
-    <View
+    <Pressable
       style={{
         borderWidth: 1,
         borderRadius: 5,
@@ -14,6 +20,9 @@ function CategoryItem(props) {
         backgroundColor: `${bgColor}`,
         overflow: "hidden",
         position: "relative",
+      }}
+      onPress={() => {
+        navigation.navigate(path);
       }}
     >
       <Text
@@ -40,7 +49,7 @@ function CategoryItem(props) {
           borderRadius: 5,
         }}
       />
-    </View>
+    </Pressable>
   );
 }
 

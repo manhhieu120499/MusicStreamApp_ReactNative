@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Cards } from "../../components";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const yoursOwn = {
   title: "Của riêng mình bạn",
@@ -86,7 +87,8 @@ const moods = {
   ],
 };
 
-function SearchForYou() {
+function SearchForYou({}) {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View
@@ -99,7 +101,14 @@ function SearchForYou() {
           columnGap: 100,
         }}
       >
-        <Icon name="arrow-left" size={20} color="#fff" />
+        <Icon
+          name="chevron-left"
+          size={20}
+          color="#fff"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
         <Text
           style={{
             color: "#fff",
