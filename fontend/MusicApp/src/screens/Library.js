@@ -1,9 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet, StatusBar, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Artists } from "../../components";
+import Logout from "./Logout/Logout";
 
 function Library() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -30,7 +40,7 @@ function Library() {
               justifyContent: "flex-start",
             }}
           >
-            <View
+            <TouchableOpacity
               style={{
                 backgroundColor: "#FFA500",
                 width: 30,
@@ -38,6 +48,7 @@ function Library() {
                 justifyContent: "center",
                 borderRadius: 30,
               }}
+              onPress={() => setShowModal(true)}
             >
               <Text
                 style={{
@@ -49,7 +60,8 @@ function Library() {
               >
                 M
               </Text>
-            </View>
+            </TouchableOpacity>
+            <Logout visible={showModal} onClose={() => setShowModal(false)} />
             <Text style={{ fontSize: 24, fontWeight: "600", color: "#fff" }}>
               Thư viện
             </Text>

@@ -4,14 +4,17 @@ import { FlatList, View } from "react-native";
 
 const videos = [
   {
+    id: 1,
     uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
     text: "#v-pop",
   },
   {
+    id: 2,
     uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
     text: "#thu-gian",
   },
   {
+    id: 3,
     uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
     text: "#nhac-phim",
   },
@@ -33,7 +36,7 @@ function CategoryVideo() {
         )}
         horizontal
         ItemSeparatorComponent={() => <View style={{ width: 13 }} />}
-        keyExtractor={(item) => item.uri}
+        keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}
       />
     </View>

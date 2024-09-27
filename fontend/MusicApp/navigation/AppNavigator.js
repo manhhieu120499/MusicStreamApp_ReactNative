@@ -14,6 +14,7 @@ import {
 } from "../src/screens";
 import PreviewItem from "../components/PreviewItem";
 import CategoryItem from "../components/Category/CategoryItem";
+import Logout from "../src/screens/Logout/Logout";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ function AppNavigator() {
         <Stack.Screen name="PreviewItem" component={PreviewItem} />
         <Stack.Screen name="CategoryItem" component={CategoryItem} />
         <Stack.Screen name="SearchForYou" component={SearchForYou} />
+        <Stack.Screen name="Logout" component={Logout} />
       </Stack.Navigator>
     </NavigationContainer>
   );

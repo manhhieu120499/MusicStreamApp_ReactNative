@@ -1,9 +1,19 @@
-import React from "react";
-import { View, Text, StatusBar, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { Category, CategoryVideo } from "../../components";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Logout from "./Logout/Logout";
 
 function Search() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -31,7 +41,7 @@ function Search() {
                 justifyContent: "flex-start",
               }}
             >
-              <View
+              <TouchableOpacity
                 style={{
                   backgroundColor: "#FFA500",
                   width: 30,
@@ -39,6 +49,7 @@ function Search() {
                   justifyContent: "center",
                   borderRadius: 30,
                 }}
+                onPress={() => setShowModal(true)}
               >
                 <Text
                   style={{
@@ -50,7 +61,8 @@ function Search() {
                 >
                   M
                 </Text>
-              </View>
+              </TouchableOpacity>
+              <Logout visible={showModal} onClose={() => setShowModal(false)} />
               <Text style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
                 Tìm kiếm
               </Text>
