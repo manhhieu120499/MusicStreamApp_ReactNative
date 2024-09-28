@@ -125,11 +125,13 @@ const dataPodcast = [
 ];
 
 function Home(props) {
+	const { navigate, goBack } = props.navigation;
 	const [active, setActive] = useState({
 		all: true,
 		music: false,
 		podcast: false,
 	});
+
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
@@ -137,7 +139,11 @@ function Home(props) {
 				style={{ flex: 100, backgroundColor: '#101010' }}
 				showsVerticalScrollIndicator={false}
 			>
-				<Navbar styles={styles} state={[active, setActive]} />
+				<Navbar
+					styles={styles}
+					state={[active, setActive]}
+					onPress={{ navigate, goBack }}
+				/>
 				{active.all && (
 					<>
 						<MusicTab data={[data, dataTwo, dataThree]} />

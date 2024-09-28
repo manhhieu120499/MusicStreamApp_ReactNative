@@ -15,6 +15,7 @@ function Navbar(props) {
 		>
 			<TouchableOpacity
 				style={{ width: 40, height: 40, borderRadius: 20 }}
+				onPress={() => onPress.navigate('Logout')}
 			>
 				<Image
 					source={{

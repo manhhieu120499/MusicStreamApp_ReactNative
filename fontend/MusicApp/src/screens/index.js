@@ -9,6 +9,7 @@ import SearchForYou from './SearchForYou';
 import PlayingMusic from './PlayingMusic';
 import Profile from './Profile';
 import Premium from './Premium';
+import Logout from './Logout';
 
 export {
 	Register,
@@ -22,4 +23,5 @@ export {
 	PlayingMusic,
 	Profile,
 	Premium,
+	Logout,
 };
