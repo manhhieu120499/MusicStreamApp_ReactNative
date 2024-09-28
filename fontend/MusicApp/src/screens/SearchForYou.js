@@ -87,7 +87,7 @@ const moods = {
   ],
 };
 
-function SearchForYou({}) {
+function SearchForYou() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
