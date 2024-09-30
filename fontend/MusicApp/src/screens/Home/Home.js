@@ -146,7 +146,10 @@ function Home(props) {
 				/>
 				{active.all && (
 					<>
-						<MusicTab data={[data, dataTwo, dataThree]} />
+						<MusicTab
+							data={[data, dataTwo, dataThree]}
+							navigation={{ navigate, goBack }}
+						/>
 						<PodcastTab data={dataPodcast} />
 					</>
 				)}

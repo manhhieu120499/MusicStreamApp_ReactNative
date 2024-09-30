@@ -84,6 +84,7 @@ import { MusicItem } from '../../../../components';
 // ];
 function MusicTab(props) {
 	const [data, dataTwo, dataThree] = props.data;
+	const { navigate, goBack } = props.navigation;
 	return (
 		<>
 			<View style={{ width: '100%' }}>
@@ -131,7 +132,12 @@ function MusicTab(props) {
 				>
 					<FlatList
 						data={data}
-						renderItem={({ item }) => <MusicItem data={item} />}
+						renderItem={({ item }) => (
+							<MusicItem
+								data={item}
+								onPress={() => navigate('PreviewItem', item)}
+							/>
+						)}
 						keyExtractor={(item) => item.id}
 						horizontal={true}
 						showsHorizontalScrollIndicator={false}

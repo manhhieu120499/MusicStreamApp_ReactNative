@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 function MusicItem(props) {
 	const { img, major, title, des, size } = props.data;
@@ -12,18 +12,20 @@ function MusicItem(props) {
 		>
 			{/** music item of list music */}
 			<View>
-				<Image
-					source={
-						img || {
-							uri: 'https://media.wired.com/photos/5926df59f3e2356fd800ab80/master/w_2560%2Cc_limit/GettyImages-543338600-S2.jpg',
+				<TouchableOpacity onPress={props.onPress}>
+					<Image
+						source={
+							img || {
+								uri: 'https://media.wired.com/photos/5926df59f3e2356fd800ab80/master/w_2560%2Cc_limit/GettyImages-543338600-S2.jpg',
+							}
 						}
-					}
-					style={{
-						width: size.toLowerCase() == 'middle' ? 140 : 80,
-						height: size.toLowerCase() == 'middle' ? 140 : 80,
-						borderRadius: 8,
-					}}
-				/>
+						style={{
+							width: size.toLowerCase() == 'middle' ? 140 : 80,
+							height: size.toLowerCase() == 'middle' ? 140 : 80,
+							borderRadius: 8,
+						}}
+					/>
+				</TouchableOpacity>
 				<View
 					style={{
 						paddingHorizontal: 5,

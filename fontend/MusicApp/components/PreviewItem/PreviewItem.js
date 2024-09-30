@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	View,
 	Text,
@@ -75,12 +75,19 @@ function PreviewItem(props) {
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
-			<Icon
-				name="chevron-left"
-				size={20}
-				color="white"
-				style={{ position: 'absolute', top: 20, paddingHorizontal: 15 }}
-			/>
+			<TouchableOpacity
+				style={{
+					position: 'absolute',
+					top: 10,
+					paddingHorizontal: 15,
+					paddingVertical: 8,
+					zIndex: 2,
+				}}
+				onPress={() => navigation.goBack()}
+			>
+				<Icon name="chevron-left" size={20} color="white" />
+			</TouchableOpacity>
+
 			<ScrollView>
 				<View
 					style={{
