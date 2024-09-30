@@ -9,7 +9,7 @@ function Cards(props) {
       <Text
         style={{
           color: "#fff",
-          fontSize: 20,
+          fontSize: 19,
           fontWeight: "600",
           marginTop: 20,
           textAlign: "center",

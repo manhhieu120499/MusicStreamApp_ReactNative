@@ -12,7 +12,18 @@ import { Popular, Album, Event, Artist, Playlist } from "../../components";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { LinearGradient } from "expo-linear-gradient";
 
-function Profile() {
+function Profile(props) {
+  const {
+    uriBanner,
+    nameArtist,
+    followers,
+    popular,
+    album,
+    event,
+    playList,
+    uriAvatar,
+    artist,
+  } = props;
   return (
     <LinearGradient
       colors={["#361913", "#000"]}
@@ -22,7 +33,7 @@ function Profile() {
     >
       <StatusBar style="light" />
       <View style={{ position: "relative" }}>
-        <Image source={require("../../assets/img/profile/banner.png")} />
+        <Image source={uriBanner} />
         <Text
           style={{
             fontSize: 48,
@@ -33,7 +44,7 @@ function Profile() {
             left: 30,
           }}
         >
-          Hòa Minzy
+          {nameArtist}
         </Text>
       </View>
       <ScrollView
@@ -42,7 +53,7 @@ function Profile() {
       >
         <View style={{ marginTop: 20 }}>
           <Text style={{ color: "#B2A8A8", fontSize: 14 }}>
-            410,1N người nghe hàng tháng
+            {followers} người nghe hàng tháng
           </Text>
           <View
             style={{
@@ -79,7 +90,7 @@ function Profile() {
         </View>
         <View style={{ marginTop: 20 }}>
           <Text style={styles.text}>Phổ biến</Text>
-          <Popular />
+          <Popular popular={popular} />
         </View>
         <View style={{ marginTop: 20 }}>
           <View
@@ -94,7 +105,7 @@ function Profile() {
               Hiện tất cả
             </Text>
           </View>
-          <Album />
+          <Album album={album} />
           <View
             style={{
               borderWidth: 1,
@@ -118,15 +129,15 @@ function Profile() {
           </View>
         </View>
         <View style={{ marginTop: 30 }}>
-          <Text style={styles.text}>Có sự tham gia của Hòa Minzy</Text>
-          <Event />
+          <Text style={styles.text}>Có sự tham gia của {nameArtist}</Text>
+          <Event event={event} />
         </View>
         <View style={{ marginTop: 20 }}>
           <Text style={styles.text}>Giới thiệu</Text>
           <View style={{ marginTop: 15 }}>
             <Image
               source={{
-                uri: "https://i.scdn.co/image/ab67616100005174c5ca014c7d8a729016b3b5f0",
+                uri: uriAvatar,
               }}
               style={{
                 height: 350,
@@ -167,7 +178,7 @@ function Profile() {
               left: 20,
             }}
           >
-            <Text style={styles.text}>411.837</Text>
+            <Text style={styles.text}>{followers}</Text>
             <Text style={{ fontSize: 13, fontWeight: "400", color: "#fff" }}>
               NGƯỜI NGHE HÀNG THÁNG
             </Text>
@@ -175,11 +186,11 @@ function Profile() {
         </View>
         <View style={{ marginTop: 40 }}>
           <Text style={styles.text}>Playlist dựa trên Nghệ sĩ</Text>
-          <Playlist />
+          <Playlist playList={playList} />
         </View>
         <View style={{ marginTop: 20, marginBottom: 100 }}>
           <Text style={styles.text}>Fan cũng thích</Text>
-          <Artist />
+          <Artist artist={artist} />
         </View>
       </ScrollView>
     </LinearGradient>

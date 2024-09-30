@@ -2,17 +2,12 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 
-const data = {
-  kpop: ["Zhou Shen", "Liu Yu", "Zhou Keyu"],
-};
-
 function CategoryItem(props) {
   const { name, bgColor, img, path } = props;
   const navigation = useNavigation();
   return (
     <Pressable
       style={{
-        borderWidth: 1,
         borderRadius: 5,
         width: 157,
         height: 82,

@@ -11,10 +11,14 @@ import {
   Library,
   SearchForYou,
   PlayingMusic,
+  SearchMusic,
+  SearchPodcasts,
+  HoaMinzy,
 } from "../src/screens";
 import PreviewItem from "../components/PreviewItem";
 import CategoryItem from "../components/Category/CategoryItem";
 import Logout from "../src/screens/Logout/Logout";
+import ArtistItem from "../components/Library/ArtistItem";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +39,10 @@ function AppNavigator() {
         <Stack.Screen name="CategoryItem" component={CategoryItem} />
         <Stack.Screen name="SearchForYou" component={SearchForYou} />
         <Stack.Screen name="Logout" component={Logout} />
+        <Stack.Screen name="SearchMusic" component={SearchMusic} />
+        <Stack.Screen name="SearchPodcasts" component={SearchPodcasts} />
+        <Stack.Screen name="ArtistItem" component={ArtistItem} />
+        <Stack.Screen name="HoaMinzy" component={HoaMinzy} />
       </Stack.Navigator>
     </NavigationContainer>
   );

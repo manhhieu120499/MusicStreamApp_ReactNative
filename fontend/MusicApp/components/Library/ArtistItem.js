@@ -1,14 +1,21 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
 function ArtistItem(props) {
-  const { name, image, text } = props;
+  const { name, image, text, path } = props;
+  const navigation = useNavigation();
   return (
-    <View style={{ marginBottom: 25 }}>
+    <Pressable
+      style={{ marginBottom: 25 }}
+      onPress={() => {
+        navigation.navigate(path);
+      }}
+    >
       <Image source={image} style={styles.image} />
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.text}>{text}</Text>
-    </View>
+    </Pressable>
   );
 }
 
