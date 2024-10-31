@@ -8,13 +8,25 @@ import {
 	StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ValidatePassword } from '../../../../utilities/Validate';
 
 function RegisterPassword(props) {
 	const { navigation, route } = props;
 	const { navigate, goBack } = navigation;
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
-	const validatePassword = (password) => {};
+	const validatePassword = (password) => {
+		if (password.length < 10)
+			return {
+				message: 'Password phải có ít nhất 10 ký tự',
+				status: false,
+			};
+		return {
+			message:
+				'Password bắt đầu bằng kí tự viết hoa theo sau là chữ thường và số\n và có ký tự đặc biệt @ hoặc #',
+			status: ValidatePassword(password),
+		};
+	};
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
@@ -99,14 +111,16 @@ function RegisterPassword(props) {
 						marginTop: 20,
 					}}
 					onPress={() => {
-						navigate('UITab');
-						if (validatePassword(password)) {
+						const { message, status } = validatePassword(password);
+						if (status) {
 							{
 								/** handle success */
+								navigate('UITab');
 							}
 						} else {
 							{
 								/** handle error */
+								alert(message);
 							}
 						}
 					}}

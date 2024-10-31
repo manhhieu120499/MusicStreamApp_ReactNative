@@ -6,15 +6,19 @@ import {
 	TextInput,
 	TouchableOpacity,
 	StatusBar,
+	Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ValidateEmail } from '../../../../utilities/Validate';
 
 function RegisterEmail(props) {
 	const { navigation, route } = props;
 	const { navigate, goBack } = navigation;
 	const [email, setEmail] = useState('');
 	const [messgae, setMessgae] = useState('');
-	const validateEmail = (email) => {};
+	const validateEmail = (email) => {
+		return ValidateEmail(email);
+	};
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
@@ -85,14 +89,15 @@ function RegisterEmail(props) {
 						marginTop: 20,
 					}}
 					onPress={() => {
-						navigate('RegisterPassword');
 						if (validateEmail(email)) {
 							{
 								/** handle success */
+								navigate('RegisterPassword', { email });
 							}
 						} else {
 							{
 								/** handle error */
+								alert('Email is not valid');
 							}
 						}
 					}}
