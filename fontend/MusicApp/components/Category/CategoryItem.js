@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 
 function CategoryItem(props) {
-  const { name, bgColor, img, path } = props;
+  const { name, bgColor, uri, path } = props;
   const navigation = useNavigation();
   return (
     <Pressable
@@ -17,7 +17,7 @@ function CategoryItem(props) {
         position: "relative",
       }}
       onPress={() => {
-        navigation.navigate(path);
+        navigation.navigate(path, { name });
       }}
     >
       <Text
@@ -33,7 +33,7 @@ function CategoryItem(props) {
         {name}
       </Text>
       <Image
-        source={img}
+        source={{ uri: uri }}
         style={{
           width: 65,
           height: 65,

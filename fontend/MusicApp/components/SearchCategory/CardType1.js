@@ -1,8 +1,8 @@
 import React from "react";
-import ArtistItem from "./ArtistItem";
 import { FlatList, Text, View } from "react-native";
+import CardType1Item from "./CardType1Item";
 
-function Artist(props) {
+function CardType1(props) {
   const { title, data } = props;
   return (
     <View>
@@ -11,23 +11,24 @@ function Artist(props) {
           color: "#fff",
           fontSize: 19,
           fontWeight: "600",
-          // marginTop: 20,
+          marginTop: 20,
+          textAlign: "center",
+          paddingBottom: 10,
         }}
       >
         {title}
       </Text>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <ArtistItem uri={item.uri} name={item.name} />
+          <CardType1Item uri={item.uri} text={item.text} title={item.title} />
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ marginTop: 20 }}
       />
     </View>
   );
 }
 
-export default Artist;
+export default CardType1;

@@ -125,7 +125,7 @@ function Category(props) {
         <CategoryItem
           name={item.name}
           bgColor={item.bgColor}
-          img={item.img}
+          uri={item.uri}
           path={item.path}
         />
       )}
