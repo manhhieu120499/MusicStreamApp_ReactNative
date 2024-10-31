@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	View,
 	TouchableOpacity,
@@ -6,20 +6,307 @@ import {
 	Text,
 	StatusBar,
 	StyleSheet,
+	SafeAreaView,
+	Animated,
+	Easing,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon5 from 'react-native-vector-icons/FontAwesome6';
 import { RandomIcon, ReflectIcon, RepeatIcon } from '../../../components/Icon';
 import Slider from '@react-native-community/slider';
+import { Audio } from 'expo-av';
+import ConvertTime from '../../../utilities/ConvertTime';
+
+// const data = [
+// 	{
+// 		id: 1,
+// 		title: 'Attention - Charliput',
+// 		author: 'Charliput',
+// 		src: require('../../../assets/audio/Attention.mp3'),
+// 	},
+// 	{
+// 		id: 2,
+// 		title: 'HuKhong - Kha',
+// 		author: 'Kha',
+// 		src: require('../../../assets/audio/HuKhong-Kha.mp3'),
+// 	},
+// 	{
+// 		id: 3,
+// 		title: 'LemonTree',
+// 		author: 'DJ DESA',
+// 		src: require('../../../assets/audio/lemontree.mp3'),
+// 	},
+// 	{
+// 		id: 4,
+// 		title: 'rington',
+// 		author: 'Apple',
+// 		src: require('../../../assets/audio/rington.mp3'),
+// 	},
+// 	{
+// 		id: 5,
+// 		title: 'Summerise - Sunshie',
+// 		author: 'Sunshie',
+// 		src: require('../../../assets/audio/Summerise.mp3'),
+// 	},
+// 	{
+// 		id: 6,
+// 		title: 'Tình ta hai ngã - Aki Khoa',
+// 		author: 'Aki Khoa',
+// 		src: require('../../../assets/audio/tinhtahainga.mp3'),
+// 	},
+// 	{
+// 		id: 7,
+// 		title: 'Sou Favela',
+// 		author: 'LeTra',
+// 		src: require('../../../assets/audio/sou.mp3'),
+// 	},
+// ];
 
 function PlayingMusic(props) {
+	const [data, setData] = useState([
+		{
+			id: 1,
+			title: 'Attention - Charliput',
+			author: 'Charliput',
+			src: require('../../../assets/audio/Attention.mp3'),
+		},
+		{
+			id: 2,
+			title: 'HuKhong - Kha',
+			author: 'Kha',
+			src: require('../../../assets/audio/HuKhong-Kha.mp3'),
+		},
+		{
+			id: 3,
+			title: 'LemonTree',
+			author: 'DJ DESA',
+			src: require('../../../assets/audio/lemontree.mp3'),
+		},
+		{
+			id: 4,
+			title: 'rington',
+			author: 'Apple',
+			src: require('../../../assets/audio/rington.mp3'),
+		},
+		{
+			id: 5,
+			title: 'Summerise - Sunshie',
+			author: 'Sunshie',
+			src: require('../../../assets/audio/Summerise.mp3'),
+		},
+		{
+			id: 6,
+			title: 'Tình ta hai ngã - Aki Khoa',
+			author: 'Aki Khoa',
+			src: require('../../../assets/audio/tinhtahainga.mp3'),
+		},
+		{
+			id: 7,
+			title: 'Sou Favela',
+			author: 'LeTra',
+			src: require('../../../assets/audio/sou.mp3'),
+		},
+	]);
 	const [isPlaying, setPlaying] = useState(false);
-	const [startMusic, setStartMusic] = useState('0:0');
-	const [endMusic, setEndMusic] = useState('3:43');
-	const [repeat, setRepeat] = useState(false);
-	const [random, setRandom] = useState(false);
+	const [currentPosition, setCurrentPosition] = useState('0:00');
+	const [duration, setDuration] = useState('3:43');
+	const [option, setOption] = useState({
+		random: false,
+		repeat: false,
+	});
+	const [index, setIndex] = useState(0);
+	const [sound, setSound] = useState();
+	const [position, setPosition] = useState(0);
+	// dùng để update index mới nhất vì setIndex update later gây ra lỗi phần tự động chuyển bài hát
+	const indexUpdate = useRef();
+	indexUpdate.current = index;
+	const [sliderValue, setSliderValue] = useState(0);
+	const [flagCheckPreOrNextPlay, setFlagCheckPreOrNextPlay] = useState(false);
+	const soundLongRef = useRef();
+	const rotateValue = useRef(new Animated.Value(0)).current;
+	const rotateLoop = useRef(null);
+
+	Audio.setAudioModeAsync({
+		allowsRecordingIOS: false,
+		staysActiveInBackground: true,
+		playsInSilentModeIOS: true, // Đảm bảo phát âm thanh ngay cả khi thiết bị ở chế độ im lặng
+	});
+
+	const startRotate = () => {
+		rotateValue.setValue(0); // Đặt lại giá trị xoay về 0
+		rotateLoop.current = Animated.loop(
+			Animated.timing(rotateValue, {
+				toValue: 1,
+				duration: 2000, // Thời gian xoay (ms)
+				easing: Easing.linear,
+				useNativeDriver: true,
+			})
+		);
+		rotateLoop.current.start();
+	};
+
+	// Sử dụng interpolate để biến đổi giá trị từ 0-1 thành 0-360 độ
+	const rotateInterpolate = rotateValue.interpolate({
+		inputRange: [0, 1],
+		outputRange: ['0deg', '360deg'],
+	});
+
+	const handlePlaySound = async () => {
+		// khi chưa phát nhạc
+		if (!isPlaying) {
+			// kiểm tra audio đã có chưa
+			if (sound == undefined) {
+				loadAndPlayNewTrack(indexUpdate.current, true);
+				startRotate();
+			} else {
+				if (sound && flagCheckPreOrNextPlay == true) {
+					console.log(3);
+					loadAndPlayNewTrack(indexUpdate.current, true);
+					setFlagCheckPreOrNextPlay(false);
+				} else {
+					console.log(2);
+					// phát tiếp vị trí đã dừng
+					await sound.playFromPositionAsync(position);
+					sound.setOnPlaybackStatusUpdate(handleMusicOnEnded);
+				}
+				startRotate();
+			}
+		} else {
+			// khi dừng thì lưu lại vị trí lúc dừng để thực hiện phát lại
+			await sound.pauseAsync();
+			const status = await sound.getStatusAsync();
+			setPosition(status.positionMillis);
+			rotateLoop.current.stop();
+		}
+	};
+
+	const setIndexAndPlayTrack = async (trackIndex, autoPlay = false) => {
+		try {
+			setIndex(trackIndex); // Update the index first
+			await loadAndPlayNewTrack(trackIndex, autoPlay); // Then call the function to load and play the track
+		} catch (e) {
+			console.log('Error setting index and playing music:', e);
+		}
+	};
+
+	const updateSound = (trackIndex, newSound) => {
+		return new Promise((resolve) => {
+			setSound(() => {
+				setIndex(trackIndex);
+				resolve();
+				return newSound;
+			});
+		});
+	};
+
+	const loadAndPlayNewTrack = async (trackIndex, autoPlay = false) => {
+		try {
+			await removeCacheMusicBefore();
+			const { sound: newSoundItem } = await Audio.Sound.createAsync(
+				data[trackIndex].src,
+				{
+					shouldPlay: autoPlay,
+				}
+			);
+
+			const status = await newSoundItem.getStatusAsync();
+			soundLongRef.current = status.durationMillis;
+
+			await updateSound(trackIndex, newSoundItem);
+			// Thiết lập theo dõi trạng thái phát nhạc
+			newSoundItem.setOnPlaybackStatusUpdate(handleMusicOnEnded);
+
+			if (isPlaying) {
+				await newSoundItem.playAsync();
+			}
+		} catch (e) {
+			console.log('Error playing music: ', e);
+		}
+	};
+
+	const removeCacheMusicBefore = async () => {
+		if (sound) {
+			// Dừng và giải phóng bài nhạc trước đó
+			await sound.unloadAsync();
+			setSound(); // Đặt lại giá trị sound thành undefine
+		}
+	};
+
+	const handleMusicOnEnded = async (status) => {
+		if (status.didJustFinish) {
+			if (option.repeat == true) {
+				loadAndPlayNewTrack(indexUpdate.current, true);
+			} else if (option.random == true) {
+				const updateIndex = Math.floor(Math.random() * data.length);
+				await loadAndPlayNewTrack(updateIndex, true);
+			} else {
+				const updateIndex = 0;
+				if (indexUpdate.current == data.length - 1) {
+					await setIndexAndPlayTrack(updateIndex, true);
+				} else {
+					await setIndexAndPlayTrack(indexUpdate.current + 1, true);
+					indexUpdate.current++;
+				}
+			}
+			setCurrentPosition('0:0');
+		}
+		if (status.isPlaying) {
+			const percentage =
+				(status.positionMillis / status.durationMillis) * 100;
+			setCurrentPosition(ConvertTime(status.positionMillis / 1000));
+			setSliderValue(percentage);
+		}
+		if (status.isLoaded) {
+			const time = ConvertTime(status.durationMillis / 1000);
+			setDuration(time);
+		}
+	};
+
+	const handleBtnNext = async () => {
+		let newIndex;
+		if (option.random) newIndex = Math.floor(Math.random() * data.length);
+		else if (index < data.length) {
+			newIndex = index + 1;
+		} else {
+			newIndex = 0;
+		}
+		indexUpdate.current = newIndex;
+		setCurrentPosition('0:0');
+		setSliderValue(0);
+		setFlagCheckPreOrNextPlay(true);
+		await setIndexAndPlayTrack(newIndex);
+	};
+
+	const handleBtnPrev = async () => {
+		let newIndex;
+		if (option.random) {
+			newIndex = Math.floor(Math.random() * data.length);
+		} else if (index > 0) {
+			newIndex = index - 1;
+		} else if (index == 0) {
+			newIndex = data.length - 1;
+		}
+		indexUpdate.current = newIndex;
+		setCurrentPosition('0:0');
+		setSliderValue(0);
+		setFlagCheckPreOrNextPlay(true);
+		await setIndexAndPlayTrack(newIndex);
+	};
+
+	const handleCompleteSilderChange = async (value) => {
+		if (sound) {
+			// Calculate the new position in milliseconds
+			const newPosition = (value / 100) * soundLongRef.current;
+			setCurrentPosition(ConvertTime(newPosition / 1000));
+			if (isPlaying) await sound.playFromPositionAsync(newPosition);
+			else {
+				await sound.setPositionAsync(newPosition);
+			}
+		}
+	};
+
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<StatusBar style="auto" />
 			<View
 				style={{
@@ -51,14 +338,31 @@ function PlayingMusic(props) {
 					justifyContent: 'center',
 				}}
 			>
-				<Image
-					source={{
-						uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
-					}}
-					width={300}
-					height={300}
-					style={{ borderRadius: 10 }}
-				/>
+				<Animated.View
+					style={[
+						{
+							width: 300,
+							height: 300,
+							borderRadius: 10,
+							borderRadius: isPlaying == true ? 150 : 10,
+						},
+						isPlaying == true
+							? { transform: [{ rotate: rotateInterpolate }] }
+							: {},
+					]}
+				>
+					<Image
+						source={{
+							uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
+						}}
+						style={{
+							width: '100%',
+							height: '100%',
+							borderRadius: 10,
+							borderRadius: isPlaying == true ? 150 : 10,
+						}}
+					/>
+				</Animated.View>
 			</View>
 
 			<View style={{ width: '100%', marginTop: 15 }}>
@@ -78,12 +382,13 @@ function PlayingMusic(props) {
 							color: 'white',
 							fontSize: 20,
 							fontWeight: 'bold',
+							height: 50,
+							textAlignVertical: 'center',
 						}}
 						numberOfLines={3}
 						ellipsizeMode="tail"
 					>
-						NGÁO NGƠ {'('}feat. HIEUTHUHAI, ERIK, Anh Tú Atus, Json
-						& Orange
+						{data[index].title}
 					</Text>
 					<Icon name="check-circle" size={20} color={'green'} />
 				</View>
@@ -94,11 +399,13 @@ function PlayingMusic(props) {
 						color: 'white',
 						marginVertical: 8,
 						width: '80%',
+						height: 50,
+						textAlignVertical: 'center',
 					}}
 					numberOfLines={1}
 					ellipsizeMode="tail"
 				>
-					ANH TRAI “SAY HI”, ERIK....
+					{data[index].author}
 				</Text>
 
 				{/** progress bar */}
@@ -109,11 +416,23 @@ function PlayingMusic(props) {
 							height: 40,
 							alignSelf: 'center',
 						}}
+						value={sliderValue}
 						minimumValue={0}
 						maximumValue={100}
 						minimumTrackTintColor="#ccc"
 						maximumTrackTintColor="white"
 						thumbStyle={{ width: 10, height: 10, borderRadius: 5 }}
+						onValueChange={(value) =>
+							setSliderValue(
+								ConvertTime(
+									(value / 100) * soundLongRef.current
+								)
+							)
+						}
+						onSlidingComplete={(value) =>
+							handleCompleteSilderChange(value)
+						}
+						step={1}
 					/>
 					<View
 						style={{
@@ -122,8 +441,10 @@ function PlayingMusic(props) {
 							justifyContent: 'space-between',
 						}}
 					>
-						<Text style={{ color: 'white' }}>{startMusic}</Text>
-						<Text style={{ color: 'white' }}>{endMusic}</Text>
+						<Text style={{ color: 'white' }}>
+							{currentPosition}
+						</Text>
+						<Text style={{ color: 'white' }}>{duration}</Text>
 					</View>
 				</View>
 				{/** play music */}
@@ -137,9 +458,16 @@ function PlayingMusic(props) {
 						marginTop: 5,
 					}}
 				>
-					<TouchableOpacity onPress={() => setRandom(!random)}>
+					<TouchableOpacity
+						onPress={() => {
+							setOption((preOption) => ({
+								...preOption,
+								random: !preOption.random,
+							}));
+						}}
+					>
 						<RandomIcon
-							color={random == true ? 'green' : 'white'}
+							color={option.random == true ? 'green' : 'white'}
 						/>
 					</TouchableOpacity>
 					<View
@@ -150,7 +478,7 @@ function PlayingMusic(props) {
 							justifyContent: 'space-between',
 						}}
 					>
-						<TouchableOpacity>
+						<TouchableOpacity onPress={() => handleBtnPrev()}>
 							<Icon
 								name="step-backward"
 								size={25}
@@ -158,7 +486,10 @@ function PlayingMusic(props) {
 							/>
 						</TouchableOpacity>
 						<TouchableOpacity
-							onPress={() => setPlaying(!isPlaying)}
+							onPress={() => {
+								handlePlaySound();
+								setPlaying(!isPlaying);
+							}}
 						>
 							{!isPlaying && (
 								<Icon
@@ -175,7 +506,7 @@ function PlayingMusic(props) {
 								/>
 							)}
 						</TouchableOpacity>
-						<TouchableOpacity>
+						<TouchableOpacity onPress={() => handleBtnNext()}>
 							<Icon
 								name="step-forward"
 								size={25}
@@ -183,9 +514,16 @@ function PlayingMusic(props) {
 							/>
 						</TouchableOpacity>
 					</View>
-					<TouchableOpacity onPress={() => setRepeat(!repeat)}>
+					<TouchableOpacity
+						onPress={() => {
+							setOption((prevOption) => ({
+								...prevOption,
+								repeat: !prevOption.repeat,
+							}));
+						}}
+					>
 						<RepeatIcon
-							color={repeat == true ? 'green' : 'white'}
+							color={option.repeat == true ? 'green' : 'white'}
 						/>
 					</TouchableOpacity>
 				</View>
@@ -210,7 +548,7 @@ function PlayingMusic(props) {
 					</TouchableOpacity>
 				</View>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 
