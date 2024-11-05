@@ -11,9 +11,11 @@
 	"author": "hieu and kieu",
 	"license": "ISC",
 	"dependencies": {
+		"cloudinary": "^2.5.1",
 		"cors": "^2.8.5",
 		"express": "^4.21.1",
 		"mongoose": "^8.7.3",
+		"musicstreamapp_backend": "file:",
 		"nodemon": "^3.1.7"
 	}
 }
