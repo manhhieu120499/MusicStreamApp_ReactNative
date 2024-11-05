@@ -210,10 +210,7 @@ function PlayingMusic(props) {
 		try {
 			await removeCacheMusicBefore();
 			const { sound: newSoundItem } = await Audio.Sound.createAsync(
-				// data[trackIndex].src,
-				{
-					uri: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700165/sjzf6rnjonxuwlsbkoi6.mp3',
-				},
+				data[trackIndex].src,
 				{
 					shouldPlay: autoPlay,
 				}
@@ -280,6 +277,8 @@ function PlayingMusic(props) {
 		} else {
 			newIndex = 0;
 		}
+		console.log(data.length);
+		console.log(newIndex);
 		indexUpdate.current = newIndex;
 		setCurrentPosition('0:0');
 		setSliderValue(0);

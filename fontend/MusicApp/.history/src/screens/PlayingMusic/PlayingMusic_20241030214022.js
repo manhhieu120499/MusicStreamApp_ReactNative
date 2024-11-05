@@ -68,49 +68,42 @@ function PlayingMusic(props) {
 			id: 1,
 			title: 'Attention - Charliput',
 			author: 'Charliput',
-			image: 'https://i.scdn.co/image/ab67616d0000b27385e10f64143313263cd25af5',
 			src: require('../../../assets/audio/Attention.mp3'),
 		},
 		{
 			id: 2,
 			title: 'HuKhong - Kha',
 			author: 'Kha',
-			image: 'https://i.scdn.co/image/ab67616d0000b27382358b9e4d73bf8b38129eda',
 			src: require('../../../assets/audio/HuKhong-Kha.mp3'),
 		},
 		{
 			id: 3,
 			title: 'LemonTree',
 			author: 'DJ DESA',
-			image: 'https://i.scdn.co/image/ab67616d0000b273310928489d92d67a26a8df04',
 			src: require('../../../assets/audio/lemontree.mp3'),
 		},
 		{
 			id: 4,
 			title: 'rington',
 			author: 'Apple',
-			image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA5r0_FrSjm2OgttQLwh_CnVCnzbJ7dLv6oA&s',
 			src: require('../../../assets/audio/rington.mp3'),
 		},
 		{
 			id: 5,
 			title: 'Summerise - Sunshie',
 			author: 'Sunshie',
-			image: 'https://i.scdn.co/image/ab67616d0000b273f8098faa3f94e7639891ec8f',
 			src: require('../../../assets/audio/Summerise.mp3'),
 		},
 		{
 			id: 6,
 			title: 'Tình ta hai ngã - Aki Khoa',
 			author: 'Aki Khoa',
-			image: 'https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/d/0/3/3/d03338f37bcf00ce8efd35b4023703ad.jpg',
 			src: require('../../../assets/audio/tinhtahainga.mp3'),
 		},
 		{
 			id: 7,
 			title: 'Sou Favela',
 			author: 'LeTra',
-			image: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/46/91/da/4691daf9-73b6-5697-2440-4f97d34ca65b/00192562931912_Cover.jpg/1200x1200bf-60.jpg',
 			src: require('../../../assets/audio/sou.mp3'),
 		},
 	]);
@@ -144,7 +137,7 @@ function PlayingMusic(props) {
 		rotateLoop.current = Animated.loop(
 			Animated.timing(rotateValue, {
 				toValue: 1,
-				duration: 5000, // Thời gian xoay (ms)
+				duration: 2000, // Thời gian xoay (ms)
 				easing: Easing.linear,
 				useNativeDriver: true,
 			})
@@ -210,10 +203,7 @@ function PlayingMusic(props) {
 		try {
 			await removeCacheMusicBefore();
 			const { sound: newSoundItem } = await Audio.Sound.createAsync(
-				// data[trackIndex].src,
-				{
-					uri: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700165/sjzf6rnjonxuwlsbkoi6.mp3',
-				},
+				data[trackIndex].src,
 				{
 					shouldPlay: autoPlay,
 				}
@@ -275,7 +265,7 @@ function PlayingMusic(props) {
 	const handleBtnNext = async () => {
 		let newIndex;
 		if (option.random) newIndex = Math.floor(Math.random() * data.length);
-		else if (indexUpdate.current < data.length - 1) {
+		else if (index < data.length) {
 			newIndex = index + 1;
 		} else {
 			newIndex = 0;
@@ -291,9 +281,9 @@ function PlayingMusic(props) {
 		let newIndex;
 		if (option.random) {
 			newIndex = Math.floor(Math.random() * data.length);
-		} else if (indexUpdate.current > 0) {
-			newIndex = indexUpdate.current - 1;
-		} else if (indexUpdate.current == 0) {
+		} else if (index > 0) {
+			newIndex = index - 1;
+		} else if (index == 0) {
 			newIndex = data.length - 1;
 		}
 		indexUpdate.current = newIndex;
@@ -363,9 +353,7 @@ function PlayingMusic(props) {
 				>
 					<Image
 						source={{
-							uri:
-								data[index].image ||
-								'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
+							uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
 						}}
 						style={{
 							width: '100%',

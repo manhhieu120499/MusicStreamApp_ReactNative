@@ -144,7 +144,7 @@ function PlayingMusic(props) {
 		rotateLoop.current = Animated.loop(
 			Animated.timing(rotateValue, {
 				toValue: 1,
-				duration: 5000, // Thời gian xoay (ms)
+				duration: 2000, // Thời gian xoay (ms)
 				easing: Easing.linear,
 				useNativeDriver: true,
 			})
@@ -210,10 +210,7 @@ function PlayingMusic(props) {
 		try {
 			await removeCacheMusicBefore();
 			const { sound: newSoundItem } = await Audio.Sound.createAsync(
-				// data[trackIndex].src,
-				{
-					uri: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700165/sjzf6rnjonxuwlsbkoi6.mp3',
-				},
+				data[trackIndex].src,
 				{
 					shouldPlay: autoPlay,
 				}
@@ -275,11 +272,13 @@ function PlayingMusic(props) {
 	const handleBtnNext = async () => {
 		let newIndex;
 		if (option.random) newIndex = Math.floor(Math.random() * data.length);
-		else if (indexUpdate.current < data.length - 1) {
+		else if (indexUpdate.current < data.length) {
 			newIndex = index + 1;
 		} else {
 			newIndex = 0;
 		}
+		console.log(data.length);
+		console.log(newIndex);
 		indexUpdate.current = newIndex;
 		setCurrentPosition('0:0');
 		setSliderValue(0);

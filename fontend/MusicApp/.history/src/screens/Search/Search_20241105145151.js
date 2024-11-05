@@ -106,7 +106,7 @@ function Search() {
 	const [categories, setCategories] = useState([]);
 	const fetchCategory = async () => {
 		const data = await fetchData('/categories/');
-		setCategories(data);
+		console.log(data);
 	};
 
 	useEffect(() => {

@@ -10,7 +10,6 @@ import {
 import { Category, CategoryVideo } from '../../../components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Logout from '../Logout/Logout';
-import { fetchData } from '../../../axios';
 
 // const categories = {
 // 	categories: [
@@ -105,8 +104,8 @@ function Search() {
 	const [showModal, setShowModal] = useState(false);
 	const [categories, setCategories] = useState([]);
 	const fetchCategory = async () => {
-		const data = await fetchData('/categories/');
-		setCategories(data);
+		const res = await axios.get('http://localhost:5000/categories');
+		setCategories([...res.data]);
 	};
 
 	useEffect(() => {

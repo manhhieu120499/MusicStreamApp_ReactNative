@@ -144,7 +144,7 @@ function PlayingMusic(props) {
 		rotateLoop.current = Animated.loop(
 			Animated.timing(rotateValue, {
 				toValue: 1,
-				duration: 5000, // Thời gian xoay (ms)
+				duration: 2000, // Thời gian xoay (ms)
 				easing: Easing.linear,
 				useNativeDriver: true,
 			})
@@ -210,10 +210,7 @@ function PlayingMusic(props) {
 		try {
 			await removeCacheMusicBefore();
 			const { sound: newSoundItem } = await Audio.Sound.createAsync(
-				// data[trackIndex].src,
-				{
-					uri: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700165/sjzf6rnjonxuwlsbkoi6.mp3',
-				},
+				data[trackIndex].src,
 				{
 					shouldPlay: autoPlay,
 				}
@@ -275,7 +272,7 @@ function PlayingMusic(props) {
 	const handleBtnNext = async () => {
 		let newIndex;
 		if (option.random) newIndex = Math.floor(Math.random() * data.length);
-		else if (indexUpdate.current < data.length - 1) {
+		else if (index < data.length) {
 			newIndex = index + 1;
 		} else {
 			newIndex = 0;
@@ -291,9 +288,9 @@ function PlayingMusic(props) {
 		let newIndex;
 		if (option.random) {
 			newIndex = Math.floor(Math.random() * data.length);
-		} else if (indexUpdate.current > 0) {
-			newIndex = indexUpdate.current - 1;
-		} else if (indexUpdate.current == 0) {
+		} else if (index > 0) {
+			newIndex = index - 1;
+		} else if (index == 0) {
 			newIndex = data.length - 1;
 		}
 		indexUpdate.current = newIndex;
@@ -363,9 +360,7 @@ function PlayingMusic(props) {
 				>
 					<Image
 						source={{
-							uri:
-								data[index].image ||
-								'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
+							uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
 						}}
 						style={{
 							width: '100%',
