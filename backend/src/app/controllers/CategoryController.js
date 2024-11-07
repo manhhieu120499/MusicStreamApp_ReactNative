@@ -6,7 +6,7 @@ class CategoryController {
 		Category.find({})
 			.then((categories) => {
 				console.log(categories);
-				res.json(multipleMongooseToObject(categories));
+				return res.json(multipleMongooseToObject(categories));
 			})
 			.catch((err) => next(err));
 	}
