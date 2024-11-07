@@ -58,8 +58,6 @@ function Logout(props) {
     })
   ).current;
 
-  useEffect(() => console.log(props));
-
   return (
     <Modal transparent={true} visible={visible} onRequestClose={onClose}>
       <View style={styles.centeredView}>

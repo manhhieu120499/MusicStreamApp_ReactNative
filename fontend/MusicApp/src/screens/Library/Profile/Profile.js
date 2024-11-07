@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,8 @@ import {
 } from "../../../../components";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { LinearGradient } from "expo-linear-gradient";
+import { Dimensions } from "react-native";
+import { fetchData } from "../../../../axios";
 
 const popular = [
   {
@@ -182,7 +184,7 @@ const artist = {
 };
 
 const HoaMinzy = {
-  uriBanner: require("../../../../assets/img/profile/banner.png"),
+  uriBanner: "https://i.scdn.co/image/ab6761610000e5ebc5ca014c7d8a729016b3b5f0",
   nameArtist: "Hòa Minzy",
   followers: "410,1N",
   popular: popular,
@@ -193,18 +195,47 @@ const HoaMinzy = {
   artist: artist,
 };
 
-function Profile(props) {
-  const {
-    uriBanner = HoaMinzy.uriBanner,
-    nameArtist = HoaMinzy.nameArtist,
-    followers = HoaMinzy.followers,
-    popular = HoaMinzy.popular,
-    album = HoaMinzy.album,
-    event = HoaMinzy.event,
-    playList = HoaMinzy.playList,
-    uriAvatar = HoaMinzy.uriAvatar,
-    artist = HoaMinzy.artist,
-  } = props;
+function Profile({ route, props }) {
+  const { name } = route.params;
+  console.log(name);
+  const [profile, setProfile] = useState({
+    uriBanner: "",
+    nameArtist: "",
+    followers: "",
+    popular: [],
+    album: [],
+    event: [],
+    playList: [],
+    uriAvatar: "",
+    artist: {
+      title: "",
+      data: [],
+    },
+  });
+
+  const loadProfile = async (name) => {
+    const res = await fetchData(
+      `/profile/find?name=${encodeURIComponent(name)}`
+    );
+    setProfile(res);
+  };
+
+  useEffect(() => {
+    loadProfile(name);
+  }, []);
+
+  // const {
+  //   uriBanner = HoaMinzy.uriBanner,
+  //   nameArtist = HoaMinzy.nameArtist,
+  //   followers = HoaMinzy.followers,
+  //   popular = HoaMinzy.popular,
+  //   album = HoaMinzy.album,
+  //   event = HoaMinzy.event,
+  //   playList = HoaMinzy.playList,
+  //   uriAvatar = HoaMinzy.uriAvatar,
+  //   artist = HoaMinzy.artist,
+  // } = props;
+
   return (
     <LinearGradient
       colors={["#361913", "#000"]}
@@ -214,7 +245,15 @@ function Profile(props) {
     >
       <StatusBar style="light" />
       <View style={{ position: "relative" }}>
-        <Image source={uriBanner} />
+        <Image
+          source={{
+            uri: profile.uriBanner,
+          }}
+          style={{
+            width: Dimensions.get("window").width,
+            height: 200,
+          }}
+        />
         <Text
           style={{
             fontSize: 48,
@@ -225,7 +264,7 @@ function Profile(props) {
             left: 30,
           }}
         >
-          {nameArtist}
+          {profile.nameArtist}
         </Text>
       </View>
       <ScrollView
@@ -234,7 +273,7 @@ function Profile(props) {
       >
         <View style={{ marginTop: 20 }}>
           <Text style={{ color: "#B2A8A8", fontSize: 14 }}>
-            {followers} người nghe hàng tháng
+            {profile.followers} người nghe hàng tháng
           </Text>
           <View
             style={{
@@ -271,7 +310,7 @@ function Profile(props) {
         </View>
         <View style={{ marginTop: 20 }}>
           <Text style={styles.text}>Phổ biến</Text>
-          <Popular popular={popular} />
+          <Popular popular={profile.popular} />
         </View>
         <View style={{ marginTop: 20 }}>
           <View
@@ -292,7 +331,7 @@ function Profile(props) {
               Hiện tất cả
             </Text>
           </View>
-          <Album album={album} />
+          <Album album={profile.album} />
           <View
             style={{
               borderWidth: 1,
@@ -316,15 +355,17 @@ function Profile(props) {
           </View>
         </View>
         <View style={{ marginTop: 30 }}>
-          <Text style={styles.text}>Có sự tham gia của {nameArtist}</Text>
-          <Event event={event} />
+          <Text style={styles.text}>
+            Có sự tham gia của {profile.nameArtist}
+          </Text>
+          <Event event={profile.event} />
         </View>
         <View style={{ marginTop: 20 }}>
           <Text style={styles.text}>Giới thiệu</Text>
           <View style={{ marginTop: 15 }}>
             <Image
               source={{
-                uri: uriAvatar,
+                uri: profile.uriAvatar,
               }}
               style={{
                 height: 350,
@@ -371,7 +412,7 @@ function Profile(props) {
               left: 20,
             }}
           >
-            <Text style={styles.text}>{followers}</Text>
+            <Text style={styles.text}>{profile.followers}</Text>
             <Text
               style={{
                 fontSize: 13,
@@ -385,10 +426,10 @@ function Profile(props) {
         </View>
         <View style={{ marginTop: 40 }}>
           <Text style={styles.text}>Playlist dựa trên Nghệ sĩ</Text>
-          <Playlist playList={playList} />
+          <Playlist playList={profile.playList} />
         </View>
         <View style={{ marginTop: 20, marginBottom: 100 }}>
-          <Artist title={artist.title} data={artist.data} />
+          <Artist title={profile.artist.title} data={profile.artist.data} />
         </View>
       </ScrollView>
     </LinearGradient>

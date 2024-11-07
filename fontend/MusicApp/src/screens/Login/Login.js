@@ -16,7 +16,7 @@ function Login(props) {
 	const { navigation, route } = props;
 	const { navigate, goBack } = navigation;
 
-	const [showPassword, setShowPassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(true);
 	const [password, setPassword] = useState('');
 	const [username, setUsername] = useState('');
 

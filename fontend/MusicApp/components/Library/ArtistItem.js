@@ -9,7 +9,7 @@ function ArtistItem(props) {
     <Pressable
       style={{ marginBottom: 25 }}
       onPress={() => {
-        navigation.navigate(path);
+        navigation.navigate(path, { name });
       }}
     >
       <Image source={image} style={styles.image} />

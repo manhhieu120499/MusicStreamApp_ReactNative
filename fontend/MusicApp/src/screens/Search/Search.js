@@ -111,14 +111,21 @@ function Search() {
 	console.log(searchText);
 
 	const fetchCategory = async () => {
-		const data = await fetchData('/categories/');
-		setCategories(data);
+		// const data = await fetchData('/categories/');
+		// setCategories(data);
+		
 		// try {
-		// 	const response = await axios.get('http://192.168.1.3:5000/categories/');
+		// 	const response = await axios.get('http://192.168.120.135:5000/categories/');
 		// 	setCategories(response.data);
 		// } catch (e) {
 		// 	console.error(e);
 		// }
+		try {
+			const response = await fetchData('/categories/');
+			setCategories(response);
+		} catch (e) {
+			console.error(e);
+		}
 	};
 
 	useEffect(() => {
