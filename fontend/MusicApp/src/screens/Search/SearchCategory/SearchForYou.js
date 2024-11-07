@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { Cards } from '../../../../components';
+import {CardType2} from '../../../../components'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
@@ -122,12 +122,12 @@ function SearchForYou() {
 			</View>
 			<ScrollView>
 				<View style={{ paddingHorizontal: 15, rowGap: 30 }}>
-					<Cards title={yoursOwn.title} data={yoursOwn.data} />
-					<Cards title={forUs.title} data={forUs.data} />
-					<Cards title={types.title} data={types.data} />
-					<Cards title={artists.title} data={artists.data} />
-					<Cards title={decade.title} data={decade.data} />
-					<Cards title={moods.title} data={moods.data} />
+					<CardType2 title={yoursOwn.title} data={yoursOwn.data} />
+					<CardType2 title={forUs.title} data={forUs.data} />
+					<CardType2 title={types.title} data={types.data} />
+					<CardType2 title={artists.title} data={artists.data} />
+					<CardType2 title={decade.title} data={decade.data} />
+					<CardType2 title={moods.title} data={moods.data} />
 					<Text
 						style={{
 							color: '#fff',

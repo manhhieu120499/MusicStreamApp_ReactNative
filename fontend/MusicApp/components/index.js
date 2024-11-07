@@ -8,14 +8,14 @@ import Album from "./Profile/Album";
 import Event from "./Profile/Event";
 import Artist from "./Profile/Artist";
 import Playlist from "./Profile/Playlist";
-import { CardType1, Cards } from "./SearchCategory";
+import { CardType1, CardType2, CardType3 } from "./SearchCategory";
 
 export {
   Category,
   CategoryVideo,
   MusicItem,
   Artists,
-  Cards,
+  CardType2,
   PodcastItem,
   Popular,
   Album,
@@ -23,4 +23,5 @@ export {
   Artist,
   Playlist,
   CardType1,
+  CardType3,
 };

@@ -2,11 +2,22 @@ const Account = require('../models/Account');
 const { singleMongooseToObject } = require('../../util/mongoose');
 
 class AccountController {
-	//[GET] find account by id
+	//[GET] find account by username and password
 	getAccount(req, res, next) {
-		Account.findOne({ username: req.params.username })
-			.then((account) => res.send(singleMongooseToObject(account)))
-			.catch((err) => next(err));
+		const { username, password } = req.query; // Lấy dữ liệu từ query
+
+		Account.findOne({ username, password })  // So sánh trực tiếp nếu mật khẩu không được mã hóa
+			.then((account) => {
+				if (account) {
+					res.send({ success: true, account: singleMongooseToObject(account) }); // Phản hồi thành công với dữ liệu tài khoản
+				} else {
+					res.status(404).send({ success: false, message: 'Account not found' });
+				}
+			})
+			.catch((err) => {
+				console.error("Error fetching account:", err);
+				res.status(500).send({ success: false, message: 'Server error' });
+			});
 	}
 
 	async createAccount(req, res, next) {

@@ -1,8 +1,8 @@
 import React from "react";
-import CardItem from "./CardItem";
+import CardType2Item from "./CardType2Item";
 import { FlatList, Text, View } from "react-native";
 
-function Cards(props) {
+function CardType2(props) {
   const { title, data } = props;
   return (
     <View>
@@ -21,7 +21,7 @@ function Cards(props) {
       <FlatList
         data={data}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <CardItem uri={item.uri} text={item.text} />}
+        renderItem={({ item }) => <CardType2Item uri={item.uri} text={item.text} />}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
@@ -29,4 +29,4 @@ function Cards(props) {
   );
 }
 
-export default Cards;
+export default CardType2;

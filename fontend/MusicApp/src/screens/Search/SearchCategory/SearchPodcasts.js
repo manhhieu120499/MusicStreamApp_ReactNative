@@ -5,38 +5,37 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const categories = {
-	categories: [
-		{
-			id: 1,
-			name: 'Bảng xếp hạng Podcast',
-			bgColor: '#0D73EC',
-			img: require('../../../../assets/img/search/img-nhac.jpg'),
-			path: '',
-		},
-		{
-			id: 2,
-			name: 'Sư phạm',
-			bgColor: '#477D95',
-			img: require('../../../../assets/img/search/img-nhac.jpg'),
-			path: '',
-		},
-		{
-			id: 3,
-			name: 'Tài liệu',
-			bgColor: '#503750',
-			img: require('../../../../assets/img/search/img-nhac.jpg'),
-			path: '',
-		},
-		{
-			id: 4,
-			name: 'Tài liệu',
-			bgColor: '#503750',
-			img: require('../../../../assets/img/search/img-nhac.jpg'),
-			path: '',
-		},
-	],
-};
+const categories = [
+	{
+		id: 1,
+		name: 'Bảng xếp hạng Podcast',
+		bgColor: '#0D73EC',
+		img: require('../../../../assets/img/search/img-nhac.jpg'),
+		path: '',
+	},
+	{
+		id: 2,
+		name: 'Sư phạm',
+		bgColor: '#477D95',
+		img: require('../../../../assets/img/search/img-nhac.jpg'),
+		path: '',
+	},
+	{
+		id: 3,
+		name: 'Tài liệu',
+		bgColor: '#503750',
+		img: require('../../../../assets/img/search/img-nhac.jpg'),
+		path: '',
+	},
+	{
+		id: 4,
+		name: 'Tài liệu',
+		bgColor: '#503750',
+		img: require('../../../../assets/img/search/img-nhac.jpg'),
+		path: '',
+	},
+]
+
 function SearchPodcasts() {
 	const navigation = useNavigation();
 	return (
@@ -79,7 +78,7 @@ function SearchPodcasts() {
 				>
 					Danh mục
 				</Text>
-				<Category categories={categories.categories} />
+				<Category categories={categories} />
 			</View>
 		</LinearGradient>
 	);

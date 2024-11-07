@@ -11,6 +11,7 @@ import {
   SearchMusic,
   SearchPodcasts,
   SearchGeneral,
+  SearchGeneral2,
   Logout,
 } from "../src/screens";
 import PreviewItem from "../components/PreviewItem";
@@ -42,6 +43,7 @@ function AppNavigator() {
         <Stack.Screen name="ArtistItem" component={ArtistItem} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="SearchGeneral" component={SearchGeneral} />
+        <Stack.Screen name="SearchGeneral2" component={SearchGeneral2} />
       </Stack.Navigator>
     </NavigationContainer>
   );
