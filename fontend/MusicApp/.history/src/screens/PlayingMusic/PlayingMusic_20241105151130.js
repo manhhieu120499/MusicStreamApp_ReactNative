@@ -18,6 +18,51 @@ import { Audio } from 'expo-av';
 import ConvertTime from '../../../utilities/ConvertTime';
 import { fetchData } from '../../../axios';
 
+// const data = [
+// 	{
+// 		id: 1,
+// 		title: 'Attention - Charliput',
+// 		author: 'Charliput',
+// 		src: require('../../../assets/audio/Attention.mp3'),
+// 	},
+// 	{
+// 		id: 2,
+// 		title: 'HuKhong - Kha',
+// 		author: 'Kha',
+// 		src: require('../../../assets/audio/HuKhong-Kha.mp3'),
+// 	},
+// 	{
+// 		id: 3,
+// 		title: 'LemonTree',
+// 		author: 'DJ DESA',
+// 		src: require('../../../assets/audio/lemontree.mp3'),
+// 	},
+// 	{
+// 		id: 4,
+// 		title: 'rington',
+// 		author: 'Apple',
+// 		src: require('../../../assets/audio/rington.mp3'),
+// 	},
+// 	{
+// 		id: 5,
+// 		title: 'Summerise - Sunshie',
+// 		author: 'Sunshie',
+// 		src: require('../../../assets/audio/Summerise.mp3'),
+// 	},
+// 	{
+// 		id: 6,
+// 		title: 'Tình ta hai ngã - Aki Khoa',
+// 		author: 'Aki Khoa',
+// 		src: require('../../../assets/audio/tinhtahainga.mp3'),
+// 	},
+// 	{
+// 		id: 7,
+// 		title: 'Sou Favela',
+// 		author: 'LeTra',
+// 		src: require('../../../assets/audio/sou.mp3'),
+// 	},
+// ];
+
 function PlayingMusic(props) {
 	// const [data, setData] = useState([
 	// 	{
@@ -70,15 +115,7 @@ function PlayingMusic(props) {
 	// 		src: require('../../../assets/audio/sou.mp3'),
 	// 	},
 	// ]);
-	const [data, setData] = useState([
-		{
-			id: '',
-			title: '',
-			author: '',
-			image: '',
-			src: '',
-		},
-	]);
+	const [data, setData] = useState([]);
 	const [isPlaying, setPlaying] = useState(false);
 	const [currentPosition, setCurrentPosition] = useState('0:00');
 	const [duration, setDuration] = useState('3:43');
@@ -337,9 +374,7 @@ function PlayingMusic(props) {
 				>
 					<Image
 						source={{
-							uri:
-								data[index].image ||
-								'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
+							uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjTIP7uCj-UAjFG-Fn9Syx2zRCSmN_aFqzsw&s',
 						}}
 						style={{
 							width: '100%',
@@ -374,7 +409,7 @@ function PlayingMusic(props) {
 						numberOfLines={3}
 						ellipsizeMode="tail"
 					>
-						{data[index].title ?? ''}
+						{data[index].title}
 					</Text>
 					<Icon name="check-circle" size={20} color={'green'} />
 				</View>
@@ -391,7 +426,7 @@ function PlayingMusic(props) {
 					numberOfLines={1}
 					ellipsizeMode="tail"
 				>
-					{data[index].author ?? ''}
+					{data[index].author}
 				</Text>
 
 				{/** progress bar */}

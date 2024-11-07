@@ -12,16 +12,11 @@ export const fetchData = (path) => {
 		.catch((err) => console.error(err));
 };
 
-export const createAccount = async ({ username, password }) => {
-	const res = await axiosInstance.post(
-		'/account/create',
-		{
+export const createAccount = ({ username, password }) => {
+	return axiosInstance
+		.post('/account/create', {
 			username: username,
 			password: password,
-		},
-		{
-			'Content-Type': 'multipart/form-data',
-		}
-	);
-	return res.status;
+		})
+		.then((res) => res);
 };

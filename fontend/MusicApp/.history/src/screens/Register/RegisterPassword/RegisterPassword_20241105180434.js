@@ -117,11 +117,11 @@ function RegisterPassword(props) {
 						if (status) {
 							/** handle success */
 							const result = async () => {
-								const newStatus = await createAccount({
+								const status = await createAccount({
 									username: route.params.email,
 									password: password,
 								});
-								return newStatus;
+								return status;
 							};
 							result()
 								.then((res) => {

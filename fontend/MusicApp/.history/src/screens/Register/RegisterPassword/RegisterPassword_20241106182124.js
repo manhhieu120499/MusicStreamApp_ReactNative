@@ -125,6 +125,7 @@ function RegisterPassword(props) {
 							};
 							result()
 								.then((res) => {
+									console.log(res);
 									return res == 200 && navigate('UITab');
 								})
 								.catch((err) => console.log(err));

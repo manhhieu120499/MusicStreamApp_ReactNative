@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ValidatePassword } from '../../../../utilities/Validate';
-import { createAccount } from '../../../../axios';
 
 function RegisterPassword(props) {
 	const { navigation, route } = props;
@@ -113,21 +112,11 @@ function RegisterPassword(props) {
 					}}
 					onPress={() => {
 						const { message, status } = validatePassword(password);
-						console.log(route.params.email);
 						if (status) {
-							/** handle success */
-							const result = async () => {
-								const newStatus = await createAccount({
-									username: route.params.email,
-									password: password,
-								});
-								return newStatus;
-							};
-							result()
-								.then((res) => {
-									return res == 200 && navigate('UITab');
-								})
-								.catch((err) => console.log(err));
+							{
+								/** handle success */
+								navigate('UITab');
+							}
 						} else {
 							{
 								/** handle error */

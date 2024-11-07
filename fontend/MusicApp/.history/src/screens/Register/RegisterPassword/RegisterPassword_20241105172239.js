@@ -117,17 +117,18 @@ function RegisterPassword(props) {
 						if (status) {
 							/** handle success */
 							const result = async () => {
-								const newStatus = await createAccount({
+								return await createAccount({
 									username: route.params.email,
 									password: password,
 								});
-								return newStatus;
 							};
-							result()
-								.then((res) => {
-									return res == 200 && navigate('UITab');
-								})
-								.catch((err) => console.log(err));
+							result().then((status) => {
+								if (status === 200) {
+									navigate('UITab');
+								} else {
+									alert('Tạo tài khoản thất bại!');
+								}
+							});
 						} else {
 							{
 								/** handle error */

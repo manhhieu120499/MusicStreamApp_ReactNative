@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
 	baseURL: 'http://10.0.2.2:5000', // Thay localhost bằng 10.0.2.2
-	timeout: 5000,
+	timeout: 10000,
 });
 
 export const fetchData = (path) => {
@@ -13,8 +13,8 @@ export const fetchData = (path) => {
 };
 
 export const createAccount = async ({ username, password }) => {
-	const res = await axiosInstance.post(
-		'/account/create',
+	const res = await axios.post(
+		'http://192.168.0.106/account/create',
 		{
 			username: username,
 			password: password,
