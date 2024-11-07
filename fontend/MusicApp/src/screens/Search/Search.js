@@ -6,11 +6,13 @@ import {
 	StyleSheet,
 	ScrollView,
 	TouchableOpacity,
+	TextInput,
 } from 'react-native';
 import { Category, CategoryVideo } from '../../../components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Logout from '../Logout/Logout';
 import { fetchData } from '../../../axios';
+import axios from 'axios';
 
 // const categories = {
 // 	categories: [
@@ -104,9 +106,19 @@ import { fetchData } from '../../../axios';
 function Search() {
 	const [showModal, setShowModal] = useState(false);
 	const [categories, setCategories] = useState([]);
+	const [searchText, setSearchText] = useState('');
+
+	console.log(searchText);
+
 	const fetchCategory = async () => {
 		const data = await fetchData('/categories/');
 		setCategories(data);
+		// try {
+		// 	const response = await axios.get('http://192.168.1.3:5000/categories/');
+		// 	setCategories(response.data);
+		// } catch (e) {
+		// 	console.error(e);
+		// }
 	};
 
 	useEffect(() => {
@@ -182,7 +194,7 @@ function Search() {
 					<View
 						style={{
 							backgroundColor: '#fff',
-							height: 49,
+							height: 45,
 							borderRadius: 5,
 							paddingHorizontal: 10,
 							flexDirection: 'row',
@@ -191,15 +203,17 @@ function Search() {
 						}}
 					>
 						<Icon name="search" size={20} color="#101010" />
-						<Text
+						<TextInput
 							style={{
 								fontSize: 18,
-								fontWeight: 'bold',
-								color: '#949494',
+								fontWeight: '600',
+								color: '#919191',
+								width: '100%',
 							}}
-						>
-							Bạn muốn nghe gì?{' '}
-						</Text>
+							placeholder='Bạn muốn nghe gì?'
+							value={searchText}
+							onChangeText={setSearchText}
+						/>
 					</View>
 				</View>
 

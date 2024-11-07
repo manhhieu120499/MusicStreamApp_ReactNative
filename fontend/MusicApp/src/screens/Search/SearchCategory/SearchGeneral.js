@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
-import { Artist, Cards, CardType1 } from "../../../../components";
+import { Artist, CardType2, CardType1 } from "../../../../components";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -176,33 +176,21 @@ const moiPhatHanh = {
   title: "Mới phát hành",
   sections: [
     { component: CardType1, title: popularV.title, data: popularV.data },
-    {
-      component: CardType1,
-      title: divaV.title,
-      data: divaV.data,
-    },
+    { component: CardType1, title: divaV.title, data: divaV.data },
   ],
 };
-const musicViet = {
+const nhacViet = {
   colors: ["#0D51A2", "#092B54", "#101010"],
   title: "Nhạc Việt",
   sections: [
     { component: CardType1, title: popularV.title, data: popularV.data },
-    {
-      component: CardType1,
-      title: divaV.title,
-      data: divaV.data,
-    },
+    { component: CardType1, title: divaV.title, data: divaV.data },
     { component: CardType1, title: roseV.title, data: roseV.data },
-    {
-      component: CardType1,
-      title: newRelease.title,
-      data: newRelease.data,
-    },
+    { component: CardType1, title: newRelease.title, data: newRelease.data, },
     { component: CardType1, title: ranking.title, data: ranking.data },
-    { component: Cards, title: dailyMix.title, data: dailyMix.data },
+    { component: CardType2, title: dailyMix.title, data: dailyMix.data },
     { component: CardType1, title: equal.title, data: equal.data },
-    { component: Cards, title: artists.title, data: artists.data },
+    { component: CardType2, title: artists.title, data: artists.data },
     { component: Artist, title: bandIndie.title, data: bandIndie.artist },
   ],
 };
@@ -211,11 +199,7 @@ const pop = {
   title: "Pop",
   sections: [
     { component: CardType1, title: popularV.title, data: popularV.data },
-    {
-      component: CardType1,
-      title: divaV.title,
-      data: divaV.data,
-    },
+    { component: CardType1, title: divaV.title, data: divaV.data, },
     { component: CardType1, title: roseV.title, data: roseV.data },
   ],
 };
@@ -224,27 +208,39 @@ const kpop = {
   title: "K-Pop",
   sections: [
     { component: CardType1, title: popularV.title, data: popularV.data },
-    {
-      component: CardType1,
-      title: divaV.title,
-      data: divaV.data,
-    },
+    { component: CardType1, title: divaV.title, data: divaV.data, },
     { component: CardType1, title: roseV.title, data: roseV.data },
   ],
 };
+
+const hipHop = {
+  colors: ["#705386", "#31253B", "#101010"],
+  title: "Hip Hop",
+  sections: [
+    { component: CardType1, title: popularV.title, data: popularV.data },
+    { component: CardType1, title: divaV.title, data: divaV.data, },
+    { component: CardType1, title: roseV.title, data: roseV.data },
+    { component: CardType1, title: newRelease.title, data: newRelease.data, },
+    { component: CardType1, title: ranking.title, data: ranking.data },
+    { component: CardType2, title: dailyMix.title, data: dailyMix.data },
+    { component: CardType1, title: equal.title, data: equal.data },
+  ],
+}
 
 function SearchGeneral({ props, route }) {
   const { name } = route.params;
 
   let selected = null;
   if (name === "Nhạc Việt") {
-    selected = musicViet;
+    selected = nhacViet;
   } else if (name === "Pop") {
     selected = pop;
   } else if (name === "K-Pop") {
     selected = kpop;
   } else if (name === "Mới phát hành") {
     selected = moiPhatHanh;
+  } else if (name === "Hip-Hop") {
+    selected = hipHop;
   }
 
   const {
@@ -252,7 +248,9 @@ function SearchGeneral({ props, route }) {
     title = selected.title,
     sections = selected.sections,
   } = selected;
+
   const navigation = useNavigation();
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <LinearGradient

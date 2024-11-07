@@ -10,6 +10,7 @@ import {
   SearchGeneral,
   SearchMusic,
   SearchPodcasts,
+  SearchGeneral2,
 } from "./Search/SearchCategory";
 import PlayingMusic from "./PlayingMusic";
 import Profile from "./Library/Profile/Profile";
@@ -32,4 +33,5 @@ export {
   SearchMusic,
   SearchPodcasts,
   SearchGeneral,
+  SearchGeneral2,
 };

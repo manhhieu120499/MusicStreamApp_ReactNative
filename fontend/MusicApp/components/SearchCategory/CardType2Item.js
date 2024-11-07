@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
-function CardItem(props) {
+function CardType2Item(props) {
   const { uri, text } = props;
   return (
     <View style={styles.container}>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardItem;
+export default CardType2Item;

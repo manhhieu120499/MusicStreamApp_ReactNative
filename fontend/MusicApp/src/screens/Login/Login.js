@@ -6,36 +6,69 @@ import {
 	StatusBar,
 	TextInput,
 	TouchableOpacity,
+	Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useState } from 'react';
+import { CheckAccount } from '../../../utilities/Validate';
 
 function Login(props) {
 	const { navigation, route } = props;
 	const { navigate, goBack } = navigation;
+
+	const [showPassword, setShowPassword] = useState(false);
+	const [password, setPassword] = useState('');
+	const [username, setUsername] = useState('');
+
+	const handleLogin = async () => {
+		if (username.trim() === '' || password.trim() === '') {
+			Alert.alert('Login Failed', 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.');
+			return;
+		}
+		const isAuthenticated = await CheckAccount(username, password);
+		if (isAuthenticated) {
+			Alert.alert('Login Successful', 'You have successfully logged in.');
+			navigation.navigate('UITab');
+		} else {
+			Alert.alert('Login Failed', 'Invalid username or password.');
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
-			<Icon
-				name="arrow-left"
-				size={24}
-				color="#fff"
-				style={{ marginTop: 20 }}
-				onPress={() => goBack('Login')}
-			/>
-			<View style={{ marginTop: 20 }}>
+			<View style={{ flexDirection: "row", alignItems: "center", columnGap: 25, marginTop: 20 }}>
+				<Icon
+					name="angle-left"
+					size={28}
+					color="#fff"
+					onPress={() => goBack('Login')}
+				/>
+				<Text style={{ fontSize: 24, fontWeight: "600", color: "white", textAlign: "center" }}>Đăng nhập</Text>
+			</View>
+			<View style={{ marginTop: 40 }}>
 				<Text style={styles.text}>Email hoặc tên người dùng</Text>
-				<TextInput style={styles.input} />
+				<View style={styles.input}>
+					<Icon name="user" size={24} color="black" />
+					<TextInput style={{ width: "85%" }} value={username} onChangeText={setUsername} />
+				</View>
 			</View>
 			<View style={{ marginTop: 20 }}>
 				<Text style={styles.text}>Mật khẩu</Text>
-				<View>
-					<TextInput style={styles.input} />
-					<Icon
-						name="eye-slash"
-						size={24}
-						color="#fff"
-						style={{ position: 'absolute', right: 11, top: 11 }}
-					/>
+				<View style={styles.input}>
+					<Icon name="lock" size={24} color="black" />
+					<TextInput
+						style={{ width: "77%" }}
+						alue={password}
+						onChangeText={setPassword}
+						secureTextEntry={showPassword} />
+					<TouchableOpacity onPress={() => setShowPassword(prev => !prev)}>
+						<Icon
+							name={showPassword ? 'eye-slash' : 'eye'}
+							size={24}
+							color="#000"
+						/>
+					</TouchableOpacity>
 				</View>
 			</View>
 			<View
@@ -47,7 +80,7 @@ function Login(props) {
 			>
 				<TouchableOpacity
 					style={styles.btn_login}
-					onPress={() => navigate('UITab')}
+					onPress={handleLogin}
 				>
 					<Text
 						style={{
@@ -60,7 +93,7 @@ function Login(props) {
 						Đăng nhập
 					</Text>
 				</TouchableOpacity>
-				<View
+				<TouchableOpacity
 					style={{
 						borderWidth: 1,
 						borderColor: '#484848',
@@ -69,11 +102,11 @@ function Login(props) {
 						paddingVertical: 5,
 						marginTop: 20,
 					}}
+					onPress={() => navigate('UITab')}
 				>
-					<Text style={{ color: 'white', fontSize: 13 }}>
-						Đăng nhập không cần mật khẩu
-					</Text>
-				</View>
+					<Text style={{ color: 'white', fontSize: 13 }}>Đăng nhập không cần mật khẩu</Text>
+
+				</TouchableOpacity>
 			</View>
 		</View>
 	);
@@ -87,19 +120,20 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 	},
 	text: {
-		fontSize: 24,
+		fontSize: 18,
 		fontWeight: 'bold',
 		color: '#fff',
 		paddingBottom: 10,
 	},
 	input: {
-		height: 50,
-		backgroundColor: '#747474',
+		flexDirection: 'row',
+		// justifyContent: 'space-between',
+		alignItems: 'center',
+		height: 40,
+		backgroundColor: '#fff',
 		borderRadius: 5,
 		paddingHorizontal: 10,
-		borderWidth: 1,
-		fontSize: 18,
-		color: '#fff',
+		columnGap: 15
 	},
 	btn_login: {
 		width: '40%',

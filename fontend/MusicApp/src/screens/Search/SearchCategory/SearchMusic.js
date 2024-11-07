@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
-import { Category, Cards } from "../../../../components";
-import { CardType1 } from "../../../../components/SearchCategory";
+import { Category, CardType2, CardType1 } from "../../../../components";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -215,21 +214,21 @@ const musicViet = {
       title: editorChoice.title,
       data: editorChoice.data,
     },
-    { component: Cards, title: yoursOwn.title, data: yoursOwn.data },
+    { component: CardType2, title: yoursOwn.title, data: yoursOwn.data },
     {
       component: CardType1,
       title: newRelease.title,
       data: newRelease.data,
     },
     { component: CardType1, title: ranking.title, data: ranking.data },
-    { component: Cards, title: dailyMix.title, data: dailyMix.data },
+    { component: CardType2, title: dailyMix.title, data: dailyMix.data },
     { component: CardType1, title: equal.title, data: equal.data },
-    { component: Cards, title: artists.title, data: artists.data },
+    { component: CardType2, title: artists.title, data: artists.data },
   ],
 };
 
 function SearchMusic(props) {
-  const {} = props;
+  const { } = props;
   const navigation = useNavigation();
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -301,12 +300,12 @@ function SearchMusic(props) {
               </Text>
             </View>
           </View>
-          <Cards title={yoursOwn.title} data={yoursOwn.data} />
+          <CardType2 title={yoursOwn.title} data={yoursOwn.data} />
           <CardType1 title={newRelease.title} data={newRelease.data} />
           <CardType1 title={ranking.title} data={ranking.data} />
-          <Cards title={dailyMix.title} data={dailyMix.data} />
+          <CardType2 title={dailyMix.title} data={dailyMix.data} />
           <CardType1 title={equal.title} data={equal.data} />
-          <Cards title={artists.title} data={artists.data} />
+          <CardType2 title={artists.title} data={artists.data} />
         </View>
       </LinearGradient>
     </ScrollView>
