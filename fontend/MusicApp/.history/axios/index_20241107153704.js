@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-	baseURL: 'http://172.20.10.7:5000', // Thay localhost bằng 10.0.2.2
-	timeout: 5000,
+	baseURL: 'http://172.20.10.7', // Thay localhost bằng 10.0.2.2
+	timeout: 10000,
 	proxy: false,
 });
 

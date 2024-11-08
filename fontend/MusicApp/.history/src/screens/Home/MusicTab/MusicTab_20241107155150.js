@@ -163,12 +163,7 @@ function MusicTab(props) {
 				>
 					<FlatList
 						data={dataTwo}
-						renderItem={({ item }) => (
-							<MusicItem
-								data={item}
-								onPress={() => navigate('PlayingMusic')}
-							/>
-						)}
+						renderItem={({ item }) => <MusicItem data={item} />}
 						keyExtractor={(item) => item.id}
 						horizontal={true}
 						showsHorizontalScrollIndicator={false}

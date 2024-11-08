@@ -18,5 +18,9 @@ import PlayingMusic from './src/screens/PlayingMusic';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
-	return <AppNavigator />;
+	return (
+		<SafeAreaView>
+			<AppNavigator />
+		</SafeAreaView>
+	);
 }

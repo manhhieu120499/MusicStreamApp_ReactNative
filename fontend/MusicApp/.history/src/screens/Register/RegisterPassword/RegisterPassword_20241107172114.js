@@ -126,18 +126,18 @@ function RegisterPassword(props) {
 							};
 							result()
 								.then((res) => {
-									// if (res == 200) {
-									// 	AsyncStorage.setItem(
-									// 		'account',
-									// 		JSON.stringify({
-									// 			username: route.params.email,
-									// 			password: password,
-									// 		})
-									// 	);
-									// }
-									// console.log(
-									// 	AsyncStorage.getItem('account')
-									// );
+									if (res == 200) {
+										AsyncStorage.setItem(
+											'account',
+											JSON.stringify({
+												username: route.params.email,
+												password: password,
+											})
+										);
+									}
+									console.log(
+										AsyncStorage.getItem('account')
+									);
 									return res == 200 && navigate('UITab');
 								})
 								.catch((err) => console.log(err));
