@@ -153,12 +153,7 @@ function Home(props) {
 						<PodcastTab data={dataPodcast} />
 					</>
 				)}
-				{active.music && (
-					<MusicTab
-						data={[data, dataTwo, dataThree]}
-						navigation={{ navigate, goBack }}
-					/>
-				)}
+				{active.music && <MusicTab data={[data, dataTwo, dataThree]} />}
 				{active.podcast && <PodcastTab data={dataPodcast} />}
 			</ScrollView>
 		</View>

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import { MusicItem } from '../../../../components';
-import { CLIENT_ID, CLIENT_SECRET } from '../../../../constant';
 
 // const data = [
 // 	{
@@ -84,9 +83,9 @@ import { CLIENT_ID, CLIENT_SECRET } from '../../../../constant';
 // 	},
 // ];
 function MusicTab(props) {
+	console.log(props.navigation);
 	const [data, dataTwo, dataThree] = props.data;
 	const { navigate, goBack } = props.navigation;
-
 	return (
 		<>
 			<View style={{ width: '100%' }}>

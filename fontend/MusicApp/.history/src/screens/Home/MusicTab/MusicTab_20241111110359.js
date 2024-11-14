@@ -87,6 +87,27 @@ function MusicTab(props) {
 	const [data, dataTwo, dataThree] = props.data;
 	const { navigate, goBack } = props.navigation;
 
+	const [newData, setNewData] = useState([]);
+	const [accessToken, setAccessToken] = useState('');
+
+	useEffect(() => {
+		var authParameters = {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/x-www-form-urlencoded',
+			},
+			body:
+				'grant_type=client_credentials&client_id=' +
+				CLIENT_ID +
+				'&client_secret=' +
+				CLIENT_SECRET +
+				'',
+		};
+		fetch('https://accounts.spotify.com/api/token', authParameters)
+			.then((res) => res.json())
+			.then((data) => setAccessToken(data));
+	});
+
 	return (
 		<>
 			<View style={{ width: '100%' }}>
