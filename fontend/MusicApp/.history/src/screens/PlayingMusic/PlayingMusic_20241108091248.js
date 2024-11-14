@@ -70,8 +70,6 @@ function PlayingMusic(props) {
 	// 		src: require('../../../assets/audio/sou.mp3'),
 	// 	},
 	// ]);
-	const { navigation, route } = props;
-	const { navigate, goBack } = navigation;
 	const [data, setData] = useState([
 		{
 			id: '',
@@ -308,7 +306,7 @@ function PlayingMusic(props) {
 					name="chevron-down"
 					size={20}
 					color={'white'}
-					onPress={() => goBack('')}
+					onPress={() => alert('Hello')}
 				/>
 				<Text
 					style={{

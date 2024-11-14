@@ -1,19 +1,18 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://172.16.1.72:5000",
-  //   baseURL: "http://10.0.2.2:5000", // Thay localhost bằng 10.0.2.2
+  baseURL: "http://172.20.10.7:5000", // Thay localhost bằng 10.0.2.2
   timeout: 5000,
+  proxy: false,
 });
 
 export const fetchData = async (path) => {
   try {
     const res = await axiosInstance.get(`${path}`);
-    return res.data;
+    return res.data; // Trả về dữ liệu nếu yêu cầu thành công
   } catch (err) {
     if (err.response) {
-      console.warn("Error response from server:", err.response.data);
-      return err.response.data;
+      return err.response.data; // Trả về dữ liệu từ phản hồi lỗi
     } else {
       console.error("Network or unexpected error:", err);
       throw err;

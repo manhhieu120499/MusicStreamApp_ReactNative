@@ -166,7 +166,7 @@ function MusicTab(props) {
 						renderItem={({ item }) => (
 							<MusicItem
 								data={item}
-								onPress={() => navigate('PlayingMusic')}
+								onPress={() => navigate('PreviewItem', item)}
 							/>
 						)}
 						keyExtractor={(item) => item.id}

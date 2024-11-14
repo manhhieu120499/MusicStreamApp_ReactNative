@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { fetchData } from '../axios';
+import axios from "axios";
+import { fetchData } from "../axios";
 
 export const ValidateEmail = (email) => {
 	const regex = /^\w+@(gmail\.com|edu\.com\.vn|outlook\.com\.vn)$/;
@@ -13,18 +13,15 @@ export const ValidatePassword = (password) => {
 
 export const CheckAccount = async (username, password) => {
 	try {
-		const response = await fetchData(
-			`/account/find?username=${username}&password=${password}`
-		);
-
+		const response = await fetchData(`account/find?username=${username}&password=${password}`);
+		console.log("Response from API:", response);
 		if (response.success) {
 			return true;
 		} else {
-			console.warn('Account not found:', response.message);
 			return false;
 		}
 	} catch (error) {
-		console.error('Error during login:', error);
+		console.error("Error during login:", error);
 		return false;
 	}
 };

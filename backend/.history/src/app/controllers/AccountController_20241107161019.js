@@ -4,15 +4,15 @@ const { singleMongooseToObject } = require('../../util/mongoose');
 class AccountController {
 	//[GET] find account by username and password
 	async getAccount(req, res, next) {
-		const { username, password } = req.query;
+		const { username, password } = req.query; // Lấy dữ liệu từ query
 
-		await Account.findOne({ username, password })
+		await Account.findOne({ username, password }) // So sánh trực tiếp nếu mật khẩu không được mã hóa
 			.then((account) => {
 				if (account) {
-					res.status(200).send({
+					res.send({
 						success: true,
 						account: singleMongooseToObject(account),
-					});
+					}); // Phản hồi thành công với dữ liệu tài khoản
 				} else {
 					res.status(404).send({
 						success: false,
@@ -21,7 +21,7 @@ class AccountController {
 				}
 			})
 			.catch((err) => {
-				console.log('Error fetching account:', err);
+				console.error('Error fetching account:', err);
 				res.status(500).send({
 					success: false,
 					message: 'Server error',

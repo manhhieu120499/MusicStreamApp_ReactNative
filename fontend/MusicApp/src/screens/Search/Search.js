@@ -108,18 +108,7 @@ function Search({ navigation }) {
   const [categories, setCategories] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  console.log(searchText);
-
   const fetchCategory = async () => {
-    // const data = await fetchData('/categories/');
-    // setCategories(data);
-
-    // try {
-    // 	const response = await axios.get('http://192.168.120.135:5000/categories/');
-    // 	setCategories(response.data);
-    // } catch (e) {
-    // 	console.error(e);
-    // }
     try {
       const response = await fetchData("/categories/");
       setCategories(response);
