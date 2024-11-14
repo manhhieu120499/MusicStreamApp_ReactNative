@@ -4,7 +4,7 @@ import { useState } from "react";
 import Logout from "../../Logout";
 
 function Navbar(props) {
-  const { styles, state, onPress } = props;
+  const { styles, state, onPress, navigation } = props;
   const [active, setActive] = state;
   const [showModal, setShowModal] = useState(false);
   return (
@@ -32,7 +32,11 @@ function Navbar(props) {
           }}
         />
       </TouchableOpacity>
-      <Logout visible={showModal} onClose={() => setShowModal(false)} />
+      <Logout
+        navigation={navigation}
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+      />
       <TouchableOpacity
         style={[
           styles.btnNavbar,
