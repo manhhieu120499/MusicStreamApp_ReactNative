@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
-	View,
-	Text,
-	StatusBar,
-	StyleSheet,
-	ScrollView,
-	TouchableOpacity,
-	TextInput,
-} from 'react-native';
-import { Category, CategoryVideo } from '../../../components';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Logout from '../Logout/Logout';
-import { fetchData } from '../../../axios';
-import axios from 'axios';
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import { Category, CategoryVideo } from "../../../components";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Logout from "../Logout/Logout";
+import { fetchData } from "../../../axios";
+import axios from "axios";
 
 // const categories = {
 // 	categories: [
@@ -103,158 +103,157 @@ import axios from 'axios';
 // 	],
 // };
 
-function Search() {
-	const [showModal, setShowModal] = useState(false);
-	const [categories, setCategories] = useState([]);
-	const [searchText, setSearchText] = useState('');
+function Search({ navigation }) {
+  const [showModal, setShowModal] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
-	console.log(searchText);
+  console.log(searchText);
 
-	const fetchCategory = async () => {
-		// const data = await fetchData('/categories/');
-		// setCategories(data);
-		
-		// try {
-		// 	const response = await axios.get('http://192.168.120.135:5000/categories/');
-		// 	setCategories(response.data);
-		// } catch (e) {
-		// 	console.error(e);
-		// }
-		try {
-			const response = await fetchData('/categories/');
-			setCategories(response);
-		} catch (e) {
-			console.error(e);
-		}
-	};
+  const fetchCategory = async () => {
+    // const data = await fetchData('/categories/');
+    // setCategories(data);
 
-	useEffect(() => {
-		fetchCategory();
-	}, []);
+    // try {
+    // 	const response = await axios.get('http://192.168.120.135:5000/categories/');
+    // 	setCategories(response.data);
+    // } catch (e) {
+    // 	console.error(e);
+    // }
+    try {
+      const response = await fetchData("/categories/");
+      setCategories(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
-	return (
-		<View style={styles.container}>
-			<ScrollView showsVerticalScrollIndicator={false}>
-				<StatusBar style="auto" />
-				<View
-					style={{
-						rowGap: 25,
-						marginBottom: 25,
-						marginTop: 30,
-						position: 'relative',
-					}}
-				>
-					<View
-						style={{
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							alignItems: 'center',
-						}}
-					>
-						<View
-							style={{
-								flexDirection: 'row',
-								columnGap: 15,
-								alignItems: 'center',
-								justifyContent: 'flex-start',
-							}}
-						>
-							<TouchableOpacity
-								style={{
-									backgroundColor: '#FFA500',
-									width: 30,
-									height: 30,
-									justifyContent: 'center',
-									borderRadius: 30,
-								}}
-								onPress={() => setShowModal(true)}
-							>
-								<Text
-									style={{
-										fontSize: 20,
-										fontWeight: 'bold',
-										color: '#fff',
-										textAlign: 'center',
-									}}
-								>
-									M
-								</Text>
-							</TouchableOpacity>
-							<Logout
-								visible={showModal}
-								onClose={() => setShowModal(false)}
-							/>
-							<Text
-								style={{
-									fontSize: 25,
-									fontWeight: 'bold',
-									color: '#fff',
-								}}
-							>
-								Tìm kiếm
-							</Text>
-						</View>
-						<View>
-							<Icon name="camera" size={25} color="#fff" />
-						</View>
-					</View>
-					<View
-						style={{
-							backgroundColor: '#fff',
-							height: 45,
-							borderRadius: 5,
-							paddingHorizontal: 10,
-							flexDirection: 'row',
-							alignItems: 'center',
-							columnGap: 10,
-						}}
-					>
-						<Icon name="search" size={20} color="#101010" />
-						<TextInput
-							style={{
-								fontSize: 18,
-								fontWeight: '600',
-								color: '#919191',
-								width: '100%',
-							}}
-							placeholder='Bạn muốn nghe gì?'
-							value={searchText}
-							onChangeText={setSearchText}
-						/>
-					</View>
-				</View>
+  useEffect(() => {
+    fetchCategory();
+  }, []);
 
-				<View style={{ marginBottom: 20 }}>
-					<Text style={styles.subTitle}>
-						Khám phá các thể loại của bạn
-					</Text>
-					<CategoryVideo />
-				</View>
+  return (
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar style="auto" />
+        <View
+          style={{
+            rowGap: 25,
+            marginBottom: 25,
+            marginTop: 30,
+            position: "relative",
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                columnGap: 15,
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#FFA500",
+                  width: 30,
+                  height: 30,
+                  justifyContent: "center",
+                  borderRadius: 30,
+                }}
+                onPress={() => setShowModal(true)}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    color: "#fff",
+                    textAlign: "center",
+                  }}
+                >
+                  M
+                </Text>
+              </TouchableOpacity>
+              <Logout
+                navigation={navigation}
+                visible={showModal}
+                onClose={() => setShowModal(false)}
+              />
+              <Text
+                style={{
+                  fontSize: 25,
+                  fontWeight: "bold",
+                  color: "#fff",
+                }}
+              >
+                Tìm kiếm
+              </Text>
+            </View>
+            <View>
+              <Icon name="camera" size={25} color="#fff" />
+            </View>
+          </View>
+          <View
+            style={{
+              backgroundColor: "#fff",
+              height: 45,
+              borderRadius: 5,
+              paddingHorizontal: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              columnGap: 10,
+            }}
+          >
+            <Icon name="search" size={20} color="#101010" />
+            <TextInput
+              style={{
+                fontSize: 18,
+                fontWeight: "600",
+                color: "#919191",
+                width: "100%",
+              }}
+              placeholder="Bạn muốn nghe gì?"
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+          </View>
+        </View>
 
-				<View>
-					<Text style={[styles.subTitle, { marginBottom: 15 }]}>
-						Duyệt tìm tất cả
-					</Text>
-					<Category categories={categories} />
-				</View>
-			</ScrollView>
-		</View>
-	);
+        <View style={{ marginBottom: 20 }}>
+          <Text style={styles.subTitle}>Khám phá các thể loại của bạn</Text>
+          <CategoryVideo />
+        </View>
+
+        <View>
+          <Text style={[styles.subTitle, { marginBottom: 15 }]}>
+            Duyệt tìm tất cả
+          </Text>
+          <Category categories={categories} />
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 100,
-		width: '100%',
-		// paddingTop: StatusBar.currentHeight,
-		backgroundColor: '#101010',
-		paddingHorizontal: 15,
-	},
-	subTitle: {
-		fontSize: 16,
-		fontWeight: 'bold',
-		color: '#fff',
-	},
+  container: {
+    flex: 100,
+    width: "100%",
+    // paddingTop: StatusBar.currentHeight,
+    backgroundColor: "#101010",
+    paddingHorizontal: 15,
+  },
+  subTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#fff",
+  },
 });
 
 export default Search;

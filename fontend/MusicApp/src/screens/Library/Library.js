@@ -63,7 +63,11 @@ function Library({ navigation }) {
                 M
               </Text>
             </TouchableOpacity>
-            <Logout visible={showModal} onClose={() => setShowModal(false)} />
+            <Logout
+              navigation={navigation}
+              visible={showModal}
+              onClose={() => setShowModal(false)}
+            />
             <Text
               style={{
                 fontSize: 24,
