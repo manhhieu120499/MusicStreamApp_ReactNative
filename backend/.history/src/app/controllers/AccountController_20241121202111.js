@@ -44,11 +44,37 @@ class AccountController {
 		}
 	}
 
+	async handleSendEmail(email) {
+		const verifyCode = Math.floor(1000 + Math.random() * 9000);
+
+		const mailOptions = {
+			from: process.env.EMAIL_ADDRESS,
+			to: email,
+			subject: 'Reset password for account',
+			text: `Your verification code is: ${verifyCode}`,
+		};
+		try {
+			const res = await transporter.sendMail(mailOptions);
+			if (res.status == 200) {
+				return {
+					status: 200,
+					verifyCode: verifyCode,
+					message: 'PassCode was send to your email!',
+				};
+			}
+		} catch (err) {
+			return {
+				status: 404,
+				verifyCode: undefined,
+				message: 'Fail to send email!',
+			};
+		}
+	}
+
 	async forgotPassword(req, res, next) {
 		const { username } = req.body;
 		const account = await Account.findOne({ username: username });
 		if (account) {
-			console.log(req.body);
 			const transporter = nodemailer.createTransport({
 				host: 'smtp.gmail.com',
 				port: 465,
@@ -69,43 +95,23 @@ class AccountController {
 			};
 
 			try {
-				const { response } = await transporter.sendMail(mailOptions);
-				if (response) {
-					res.status(200).send({
+				const response = await transporter.sendMail(mailOptions);
+				if (response.status == 200) {
+					return res.status(200).send({
 						verifyCode: verifyCode,
 						message: 'PassCode was send to your email!',
 					});
 				}
 			} catch (err) {
-				res.status(500).send({
+				return res.status(500).send({
 					verifyCode: undefined,
 					message: 'Fail to send email!',
 				});
 			}
 		} else {
-			res.status(404).send({
+			return res.status(404).send({
 				verifyCode: undefined,
 				message: 'Account not found',
-			});
-		}
-	}
-
-	async updatePassword(req, res, next) {
-		const { username, newPassword } = req.body;
-		const account = await Account.findOneAndUpdate(
-			{
-				username: username,
-			},
-			{ password: newPassword },
-			{ new: true }
-		);
-		if (account) {
-			res.status(200).send({
-				message: 'Password updated successfully',
-			});
-		} else {
-			res.status(404).send({
-				message: 'Update password failed',
 			});
 		}
 	}

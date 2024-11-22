@@ -89,26 +89,6 @@ class AccountController {
 			});
 		}
 	}
-
-	async updatePassword(req, res, next) {
-		const { username, newPassword } = req.body;
-		const account = await Account.findOneAndUpdate(
-			{
-				username: username,
-			},
-			{ password: newPassword },
-			{ new: true }
-		);
-		if (account) {
-			res.status(200).send({
-				message: 'Password updated successfully',
-			});
-		} else {
-			res.status(404).send({
-				message: 'Update password failed',
-			});
-		}
-	}
 }
 
 module.exports = new AccountController();

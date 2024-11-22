@@ -13,9 +13,11 @@
 	"dependencies": {
 		"cloudinary": "^2.5.1",
 		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
 		"express": "^4.21.1",
 		"mongoose": "^8.7.3",
 		"musicstreamapp_backend": "file:",
+		"nodemailer": "^6.9.16",
 		"nodemon": "^3.1.7"
 	}
 }

@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const db = require('./config/db');
 const routes = require('./routes');
-require('dotenv').config();
+const dotenv = require('.dotenv');
 // const upload = require('./config/uploadAudio');
 
 // connect to the database
@@ -16,6 +16,8 @@ db.connect();
 app.use(express.json());
 
 app.use(cors());
+
+app.use(dotenv);
 
 // định tuyến cho app
 routes(app);

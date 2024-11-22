@@ -44,69 +44,61 @@ class AccountController {
 		}
 	}
 
+	async handleSendEmail(req, res, next) {
+		const { username } = req.body;
+		const transporter = nodemailer.createTransport({
+			host: 'smtp.example.com',
+			port: 587,
+			secure: false,
+			service: 'gmail',
+			auth: {
+				user: process.env.EMAIL_ADDRESS,
+				pass: process.env.EMAIL_PASSWORD,
+			},
+		});
+
+		const verifyCode = Math.floor(1000 + Math.random() * 9000);
+
+		const mailOptions = {
+			from: process.env.EMAIL_ADDRESS,
+			to: username,
+			subject: 'Reset password for account',
+			text: `Your verification code is: ${verifyCode}`,
+		};
+		try {
+			const res = await transporter.sendMail(mailOptions);
+			console.log(res);
+			if (res.status == 200) {
+				return {
+					status: 200,
+					verifyCode: verifyCode,
+					message: 'PassCode was send to your email!',
+				};
+			} else {
+				return {
+					status: 404,
+					verifyCode: undefined,
+					message: 'Fail to send email!',
+				};
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
 	async forgotPassword(req, res, next) {
 		const { username } = req.body;
 		const account = await Account.findOne({ username: username });
 		if (account) {
-			console.log(req.body);
-			const transporter = nodemailer.createTransport({
-				host: 'smtp.gmail.com',
-				port: 465,
-				secure: true, // true for 465, false for other ports
-				auth: {
-					user: process.env.EMAIL_ADDRESS,
-					pass: process.env.EMAIL_PASSWORD,
-				},
-			});
-
-			const verifyCode = Math.floor(1000 + Math.random() * 9000);
-
-			const mailOptions = {
-				from: process.env.EMAIL_ADDRESS,
-				to: username,
-				subject: 'Reset password for account',
-				text: `Your verification code is: ${verifyCode}`,
-			};
-
-			try {
-				const { response } = await transporter.sendMail(mailOptions);
-				if (response) {
-					res.status(200).send({
-						verifyCode: verifyCode,
-						message: 'PassCode was send to your email!',
-					});
-				}
-			} catch (err) {
-				res.status(500).send({
-					verifyCode: undefined,
-					message: 'Fail to send email!',
-				});
-			}
-		} else {
-			res.status(404).send({
-				verifyCode: undefined,
-				message: 'Account not found',
-			});
-		}
-	}
-
-	async updatePassword(req, res, next) {
-		const { username, newPassword } = req.body;
-		const account = await Account.findOneAndUpdate(
-			{
-				username: username,
-			},
-			{ password: newPassword },
-			{ new: true }
-		);
-		if (account) {
+			// Send email to user
+			const result = await this.handleSendEmail(username);
+			console.log(result);
 			res.status(200).send({
-				message: 'Password updated successfully',
+				verifyCode: verifyCode,
+				message: message,
 			});
 		} else {
-			res.status(404).send({
-				message: 'Update password failed',
-			});
+			res.status(404).send({ message: 'Account not found' });
 		}
 	}
 }

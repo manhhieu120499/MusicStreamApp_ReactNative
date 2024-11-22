@@ -1,7 +1,6 @@
 const Account = require('../models/Account');
 const { singleMongooseToObject } = require('../../util/mongoose');
 const nodemailer = require('nodemailer');
-require('dotenv').config();
 
 class AccountController {
 	//[GET] find account by username and password
@@ -48,65 +47,12 @@ class AccountController {
 		const { username } = req.body;
 		const account = await Account.findOne({ username: username });
 		if (account) {
-			console.log(req.body);
-			const transporter = nodemailer.createTransport({
-				host: 'smtp.gmail.com',
-				port: 465,
-				secure: true, // true for 465, false for other ports
-				auth: {
-					user: process.env.EMAIL_ADDRESS,
-					pass: process.env.EMAIL_PASSWORD,
-				},
-			});
-
-			const verifyCode = Math.floor(1000 + Math.random() * 9000);
-
-			const mailOptions = {
-				from: process.env.EMAIL_ADDRESS,
-				to: username,
-				subject: 'Reset password for account',
-				text: `Your verification code is: ${verifyCode}`,
-			};
-
-			try {
-				const { response } = await transporter.sendMail(mailOptions);
-				if (response) {
-					res.status(200).send({
-						verifyCode: verifyCode,
-						message: 'PassCode was send to your email!',
-					});
-				}
-			} catch (err) {
-				res.status(500).send({
-					verifyCode: undefined,
-					message: 'Fail to send email!',
-				});
-			}
-		} else {
-			res.status(404).send({
-				verifyCode: undefined,
-				message: 'Account not found',
-			});
-		}
-	}
-
-	async updatePassword(req, res, next) {
-		const { username, newPassword } = req.body;
-		const account = await Account.findOneAndUpdate(
-			{
-				username: username,
-			},
-			{ password: newPassword },
-			{ new: true }
-		);
-		if (account) {
+			// Send email to user
 			res.status(200).send({
-				message: 'Password updated successfully',
+				message: 'PassCode was send to your email!',
 			});
 		} else {
-			res.status(404).send({
-				message: 'Update password failed',
-			});
+			res.status(404).send({ message: 'Account not found' });
 		}
 	}
 }

@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const db = require('./config/db');
 const routes = require('./routes');
-require('dotenv').config();
+const dotenv = require('dotenv').config();
 // const upload = require('./config/uploadAudio');
 
 // connect to the database

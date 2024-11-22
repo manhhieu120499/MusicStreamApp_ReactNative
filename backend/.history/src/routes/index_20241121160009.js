@@ -5,7 +5,7 @@ const profileRouter = require('./profile');
 
 function route(app) {
 	app.use('/home', (req, res) => {
-		res.send('Hello anh em f8');
+		res.send(process.env.EMAIL_ADDRESS);
 	});
 	app.use('/songs', musicRouter);
 	app.use('/account', accountRouter);

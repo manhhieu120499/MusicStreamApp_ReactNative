@@ -48,7 +48,6 @@ class AccountController {
 		const { username } = req.body;
 		const account = await Account.findOne({ username: username });
 		if (account) {
-			console.log(req.body);
 			const transporter = nodemailer.createTransport({
 				host: 'smtp.gmail.com',
 				port: 465,
@@ -69,8 +68,8 @@ class AccountController {
 			};
 
 			try {
-				const { response } = await transporter.sendMail(mailOptions);
-				if (response) {
+				const response = await transporter.sendMail(mailOptions);
+				if (response.status == 200) {
 					res.status(200).send({
 						verifyCode: verifyCode,
 						message: 'PassCode was send to your email!',
@@ -86,26 +85,6 @@ class AccountController {
 			res.status(404).send({
 				verifyCode: undefined,
 				message: 'Account not found',
-			});
-		}
-	}
-
-	async updatePassword(req, res, next) {
-		const { username, newPassword } = req.body;
-		const account = await Account.findOneAndUpdate(
-			{
-				username: username,
-			},
-			{ password: newPassword },
-			{ new: true }
-		);
-		if (account) {
-			res.status(200).send({
-				message: 'Password updated successfully',
-			});
-		} else {
-			res.status(404).send({
-				message: 'Update password failed',
 			});
 		}
 	}
