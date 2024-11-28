@@ -106,7 +106,6 @@ import axios from "axios";
 function Search({ navigation }) {
   const [showModal, setShowModal] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [searchText, setSearchText] = useState("");
 
   const fetchCategory = async () => {
     try {
@@ -208,8 +207,7 @@ function Search({ navigation }) {
                 width: "100%",
               }}
               placeholder="Bạn muốn nghe gì?"
-              value={searchText}
-              onChangeText={setSearchText}
+              onFocus={() => navigation.navigate("SearchScreen")}
             />
           </View>
         </View>
