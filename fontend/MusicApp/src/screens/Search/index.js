@@ -1,1 +1,4 @@
-export { default } from './Search';
+import SearchScreen from "./SearchScreen";
+import Search from "./Search";
+
+export { SearchScreen, Search };
