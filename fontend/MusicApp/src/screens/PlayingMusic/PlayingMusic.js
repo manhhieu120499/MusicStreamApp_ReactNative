@@ -99,7 +99,8 @@ function PlayingMusic(props) {
 	const indexUpdate = useRef();
 	indexUpdate.current = index;
 	const [sliderValue, setSliderValue] = useState(0);
-	const [flagCheckPreOrNextPlay, setFlagCheckPreOrNextPlay] = useState(false);
+	const flagCheckPreOrNextPlay = useRef();
+	flagCheckPreOrNextPlay.current = false;
 	const soundLongRef = useRef();
 	const rotateValue = useRef(new Animated.Value(0)).current;
 	const rotateLoop = useRef(null);
@@ -143,13 +144,14 @@ function PlayingMusic(props) {
 		if (!isPlaying) {
 			// kiểm tra audio đã có chưa
 			if (sound == undefined) {
+				console.log(5);
 				loadAndPlayNewTrack(indexUpdate.current, true);
 				startRotate();
 			} else {
 				if (sound && flagCheckPreOrNextPlay == true) {
 					console.log(3);
+					flagCheckPreOrNextPlay.current = false;
 					loadAndPlayNewTrack(indexUpdate.current, true);
-					setFlagCheckPreOrNextPlay(false);
 				} else {
 					console.log(2);
 					// phát tiếp vị trí đã dừng
@@ -159,6 +161,7 @@ function PlayingMusic(props) {
 				startRotate();
 			}
 		} else {
+			console.log(4);
 			// khi dừng thì lưu lại vị trí lúc dừng để thực hiện phát lại
 			await sound.pauseAsync();
 			const status = await sound.getStatusAsync();
@@ -264,7 +267,7 @@ function PlayingMusic(props) {
 		indexUpdate.current = newIndex;
 		setCurrentPosition('0:0');
 		setSliderValue(0);
-		setFlagCheckPreOrNextPlay(true);
+		flagCheckPreOrNextPlay.current = true;
 		await setIndexAndPlayTrack(newIndex);
 	};
 
@@ -280,7 +283,7 @@ function PlayingMusic(props) {
 		indexUpdate.current = newIndex;
 		setCurrentPosition('0:0');
 		setSliderValue(0);
-		setFlagCheckPreOrNextPlay(true);
+		flagCheckPreOrNextPlay.current = true;
 		await setIndexAndPlayTrack(newIndex);
 	};
 
