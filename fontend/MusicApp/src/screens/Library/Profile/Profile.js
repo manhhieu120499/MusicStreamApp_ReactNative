@@ -155,31 +155,6 @@ const artist = {
       name: "Hòa Minzy",
       uri: "https://i.scdn.co/image/ab676161000051742fc3ef8a80c35243e5e899b8",
     },
-    {
-      id: 6,
-      name: "Hòa Minzy",
-      uri: "https://i.scdn.co/image/ab676161000051742fc3ef8a80c35243e5e899b8",
-    },
-    {
-      id: 7,
-      name: "Hòa Minzy",
-      uri: "https://i.scdn.co/image/ab676161000051742fc3ef8a80c35243e5e899b8",
-    },
-    {
-      id: 8,
-      name: "Hòa Minzy",
-      uri: "https://i.scdn.co/image/ab676161000051742fc3ef8a80c35243e5e899b8",
-    },
-    {
-      id: 9,
-      name: "Hòa Minzy",
-      uri: "https://i.scdn.co/image/ab676161000051742fc3ef8a80c35243e5e899b8",
-    },
-    {
-      id: 10,
-      name: "Hòa Minzy",
-      uri: "https://i.scdn.co/image/ab676161000051742fc3ef8a80c35243e5e899b8",
-    },
   ],
 };
 
@@ -195,18 +170,20 @@ const HoaMinzy = {
   artist: artist,
 };
 
-function Profile({ route, props }) {
+function Profile({ route, navigation }) {
   const { name } = route.params;
   console.log(name);
   const [profile, setProfile] = useState({
-    uriBanner: "",
+    uriBanner:
+      "https://cuocsongdungnghia.com/wp-content/uploads/2018/05/loi-hinh-anh.jpg",
     nameArtist: "",
     followers: "",
     popular: [],
     album: [],
     event: [],
     playList: [],
-    uriAvatar: "",
+    uriAvatar:
+      "https://cuocsongdungnghia.com/wp-content/uploads/2018/05/loi-hinh-anh.jpg",
     artist: {
       title: "",
       data: [],
@@ -224,18 +201,6 @@ function Profile({ route, props }) {
     loadProfile(name);
   }, []);
 
-  // const {
-  //   uriBanner = HoaMinzy.uriBanner,
-  //   nameArtist = HoaMinzy.nameArtist,
-  //   followers = HoaMinzy.followers,
-  //   popular = HoaMinzy.popular,
-  //   album = HoaMinzy.album,
-  //   event = HoaMinzy.event,
-  //   playList = HoaMinzy.playList,
-  //   uriAvatar = HoaMinzy.uriAvatar,
-  //   artist = HoaMinzy.artist,
-  // } = props;
-
   return (
     <LinearGradient
       colors={["#361913", "#000"]}
@@ -245,6 +210,15 @@ function Profile({ route, props }) {
     >
       <StatusBar style="light" />
       <View style={{ position: "relative" }}>
+        <Icon
+          name="chevron-left"
+          size={20}
+          color="#fff"
+          style={{ position: "absolute", top: 13, left: 30, zIndex: 1 }}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
         <Image
           source={{
             uri: profile.uriBanner,
