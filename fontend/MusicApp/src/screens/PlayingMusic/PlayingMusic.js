@@ -18,60 +18,69 @@ import { Audio } from 'expo-av';
 import ConvertTime from '../../../utilities/ConvertTime';
 import { fetchData } from '../../../axios';
 
-function PlayingMusic(props) {
-	// const [data, setData] = useState([
-	// 	{
-	// 		id: 1,
-	// 		title: 'Attention - Charliput',
-	// 		author: 'Charliput',
-	// 		image: 'https://i.scdn.co/image/ab67616d0000b27385e10f64143313263cd25af5',
-	// 		src: require('../../../assets/audio/Attention.mp3'),
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		title: 'HuKhong - Kha',
-	// 		author: 'Kha',
-	// 		image: 'https://i.scdn.co/image/ab67616d0000b27382358b9e4d73bf8b38129eda',
-	// 		src: require('../../../assets/audio/HuKhong-Kha.mp3'),
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		title: 'LemonTree',
-	// 		author: 'DJ DESA',
-	// 		image: 'https://i.scdn.co/image/ab67616d0000b273310928489d92d67a26a8df04',
-	// 		src: require('../../../assets/audio/lemontree.mp3'),
-	// 	},
-	// 	{
-	// 		id: 4,
-	// 		title: 'rington',
-	// 		author: 'Apple',
-	// 		image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA5r0_FrSjm2OgttQLwh_CnVCnzbJ7dLv6oA&s',
-	// 		src: require('../../../assets/audio/rington.mp3'),
-	// 	},
-	// 	{
-	// 		id: 5,
-	// 		title: 'Summerise - Sunshie',
-	// 		author: 'Sunshie',
-	// 		image: 'https://i.scdn.co/image/ab67616d0000b273f8098faa3f94e7639891ec8f',
-	// 		src: require('../../../assets/audio/Summerise.mp3'),
-	// 	},
-	// 	{
-	// 		id: 6,
-	// 		title: 'Tình ta hai ngã - Aki Khoa',
-	// 		author: 'Aki Khoa',
-	// 		image: 'https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/d/0/3/3/d03338f37bcf00ce8efd35b4023703ad.jpg',
-	// 		src: require('../../../assets/audio/tinhtahainga.mp3'),
-	// 	},
-	// 	{
-	// 		id: 7,
-	// 		title: 'Sou Favela',
-	// 		author: 'LeTra',
-	// 		image: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/46/91/da/4691daf9-73b6-5697-2440-4f97d34ca65b/00192562931912_Cover.jpg/1200x1200bf-60.jpg',
-	// 		src: require('../../../assets/audio/sou.mp3'),
-	// 	},
-	// ]);
-	const { navigation, route } = props;
+function PlayingMusic({ navigation, route }) {
+	const [dataForSearch, setDataForSearch] = useState([
+		{
+			id: 1,
+			title: 'Attention',
+			author: 'Charliput',
+			image: 'https://i.scdn.co/image/ab67616d0000b27385e10f64143313263cd25af5',
+			src: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700165/sjzf6rnjonxuwlsbkoi6.mp3',
+		},
+		{
+			id: 2,
+			title: 'Hư không',
+			author: 'Kha',
+			image: 'https://i.scdn.co/image/ab67616d0000b27382358b9e4d73bf8b38129eda',
+			src: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700169/psoirabrgfjjqy90moyl.mp3',
+		},
+		{
+			id: 3,
+			title: 'Lemon Tree',
+			author: 'DJ DESA',
+			image: 'https://i.scdn.co/image/ab67616d0000b273310928489d92d67a26a8df04',
+			src: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700173/qjwdzmpddlskuef0eflm.mp3',
+		},
+		{
+			id: 4,
+			title: 'rington',
+			author: 'Apple',
+			image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA5r0_FrSjm2OgttQLwh_CnVCnzbJ7dLv6oA&s',
+			src: require('../../../assets/audio/rington.mp3'),
+		},
+		{
+			id: 5,
+			title: 'Summerise',
+			author: 'Sunshie',
+			image: 'https://i.scdn.co/image/ab67616d0000b273f8098faa3f94e7639891ec8f',
+			src: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700214/bx54h4psesnmfqo8mlmu.mp3',
+		},
+		{
+			id: 6,
+			title: 'Tình Ta Hai Ngã',
+			author: 'Aki Khoa',
+			image: 'https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/d/0/3/3/d03338f37bcf00ce8efd35b4023703ad.jpg',
+			src: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700218/mtorv1hdyykirjoziyml.mp3',
+		},
+		{
+			id: 7,
+			title: 'Sou Favela',
+			author: 'LeTra',
+			image: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/46/91/da/4691daf9-73b6-5697-2440-4f97d34ca65b/00192562931912_Cover.jpg/1200x1200bf-60.jpg',
+			src: 'https://res.cloudinary.com/dwzptn5fj/video/upload/v1730700200/wl5arxj7u4tejcogtmxt.mp3',
+		},
+	]);
+
 	const { navigate, goBack } = navigation;
+	const { singleMusic } = route?.params || {
+		singleMusic: undefined,
+	};
+	const { albumMusic } = route?.params || {
+		albumMusic: [],
+	};
+
+	const { type } = route?.params || '';
+
 	const [data, setData] = useState([
 		{
 			id: '',
@@ -117,7 +126,35 @@ function PlayingMusic(props) {
 	};
 
 	useEffect(() => {
-		fetchSong();
+		if (singleMusic == undefined && albumMusic.length == 0) fetchSong();
+		else if (singleMusic != undefined) {
+			const convertObject =
+				type == ''
+					? {
+							id: singleMusic.id,
+							title: singleMusic.name,
+							author: singleMusic.artists[0].name,
+							image: singleMusic.album.images[1].url,
+							src: dataForSearch.find(
+								(item) => item.title == singleMusic.name
+							).src,
+					  }
+					: {
+							...singleMusic,
+					  };
+			setData([convertObject]);
+		} else if (albumMusic.length > 0) {
+			const newArr = albumMusic.map((item) => {
+				return {
+					id: item.id,
+					title: item.title,
+					author: item.author,
+					image: item.image,
+					src: item.src,
+				};
+			});
+			setData([...newArr]);
+		}
 	}, []);
 
 	const startRotate = () => {

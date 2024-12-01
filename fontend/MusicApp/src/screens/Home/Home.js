@@ -69,25 +69,25 @@ const dataTwo = [
 
 const dataThree = [
 	{
-		id: 1,
+		id: 8,
 		img: require('../../../assets/img/recentAlbum/image.jpg'),
 		title: 'ANH TRAI “SAY HI” Radio',
 		size: 'small',
 	},
 	{
-		id: 2,
+		id: 9,
 		img: require('../../../assets/img/recentAlbum/image2.jpg'),
 		title: 'HieuThuHai Radio',
 		size: 'small',
 	},
 	{
-		id: 3,
+		id: 10,
 		img: require('../../../assets/img/recentAlbum/image3.jpg'),
 		title: 'Hoa Nở Không Màu guitar',
 		size: 'small',
 	},
 	{
-		id: 4,
+		id: 11,
 		img: require('../../../assets/img/recentAlbum/image4.jpg'),
 		title: 'Thanh Hưng Radio',
 		size: 'small',

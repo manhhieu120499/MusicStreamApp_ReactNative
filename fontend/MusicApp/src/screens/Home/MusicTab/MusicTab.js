@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import { MusicItem } from '../../../../components';
 import { CLIENT_ID, CLIENT_SECRET } from '../../../../constant';
+import { getAlbum, getSingleSong } from '../../../../axios';
 
 // const data = [
 // 	{
@@ -137,7 +138,7 @@ function MusicTab(props) {
 						renderItem={({ item }) => (
 							<MusicItem
 								data={item}
-								onPress={() => navigate('PreviewItem', item)}
+								// onPress={() => navigate('PreviewItem', item)}
 							/>
 						)}
 						keyExtractor={(item) => item.id}
@@ -168,7 +169,15 @@ function MusicTab(props) {
 						renderItem={({ item }) => (
 							<MusicItem
 								data={item}
-								onPress={() => navigate('PlayingMusic')}
+								onPress={async () => {
+									const result = await getAlbum(item.id);
+									navigate('PlayingMusic', {
+										albumMusic:
+											result.status == 200
+												? result.data.songs
+												: [],
+									});
+								}}
 							/>
 						)}
 						keyExtractor={(item) => item.id}
@@ -195,7 +204,21 @@ function MusicTab(props) {
 				>
 					<FlatList
 						data={dataThree}
-						renderItem={({ item }) => <MusicItem data={item} />}
+						renderItem={({ item }) => (
+							<MusicItem
+								data={item}
+								onPress={async () => {
+									const result = await getSingleSong(item.id);
+									navigate('PlayingMusic', {
+										singleMusic:
+											result.status == 200
+												? result.data
+												: undefined,
+										type: 'recently-played',
+									});
+								}}
+							/>
+						)}
 						keyExtractor={(item) => item.id}
 						horizontal={true}
 						showsHorizontalScrollIndicator={false}
