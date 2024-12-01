@@ -7,13 +7,17 @@ cloudinary.config({
 });
 
 const arrAudio = [
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/Attention.mp3',
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/HuKhong-Kha.mp3',
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/lemontree.mp3',
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/rington.mp3',
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/sou.mp3',
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/Summerise.mp3',
-	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/tinhtahainga.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/Attention.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/HuKhong-Kha.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/lemontree.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/rington.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/sou.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/Summerise.mp3',
+	// 'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/tinhtahainga.mp3',
+	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/can_khong_co_co_khong_can.mp3',
+	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/tran_bo_nho.mp3',
+	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/hoa_no_khong_mau.mp3',
+	'E:/HOCKI7_2024-2025/SubProject/MusicStreamApp_ReactNative/backend/src/resource/audio/khong_the_say.mp3',
 ];
 
 async function uploadAudio() {

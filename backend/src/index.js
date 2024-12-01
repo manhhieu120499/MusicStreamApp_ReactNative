@@ -11,7 +11,6 @@ db.connect();
 
 // upload audio file
 // upload.uploadAudio();
-
 // đọc dữ liệu dạng json
 app.use(express.json());
 
